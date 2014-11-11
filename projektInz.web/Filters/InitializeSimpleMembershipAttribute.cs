@@ -5,6 +5,7 @@ using System.Threading;
 using System.Web.Mvc;
 using WebMatrix.WebData;
 using projektInz.web.Models;
+using projektInz.dane;
 
 namespace projektInz.web.Filters
 {
@@ -25,20 +26,10 @@ namespace projektInz.web.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
-
                 try
                 {
-                    using (var context = new UsersContext())
-                    {
-                        if (!context.Database.Exists())
-                        {
-                            // Create the SimpleMembership database without Entity Framework migration schema
-                            ((IObjectContextAdapter)context).ObjectContext.CreateDatabase();
-                        }
-                    }
-
-                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    new KontekstDanych().Database.Initialize(true);
+                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "Uzytkownik", "Id", "Nazwa", autoCreateTables: false);
                 }
                 catch (Exception ex)
                 {

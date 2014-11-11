@@ -10,6 +10,8 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using projektInz.web.Filters;
 using projektInz.web.Models;
+using projektInz.dane;
+using projektInz.biznes;
 
 namespace projektInz.web.Controllers
 {
@@ -263,14 +265,14 @@ namespace projektInz.web.Controllers
             if (ModelState.IsValid)
             {
                 // Insert a new user into the database
-                using (UsersContext db = new UsersContext())
+                using (KontekstDanych db = new KontekstDanych())
                 {
-                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                    Użytkownik user = db.Użytkownicy.FirstOrDefault(u => u.Nazwa.ToLower() == model.UserName.ToLower());
                     // Check if user already exists
                     if (user == null)
                     {
                         // Insert name into the profile table
-                        db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+                        db.Użytkownicy.Add(new Użytkownik { Nazwa = model.UserName });
                         db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
@@ -280,7 +282,7 @@ namespace projektInz.web.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
+                        ModelState.AddModelError("Nazwa", "User name already exists. Please enter a different user name.");
                     }
                 }
             }
