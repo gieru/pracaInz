@@ -29,7 +29,7 @@ namespace projektInz.web.Filters
                 try
                 {
                     new KontekstDanych().Database.Initialize(true);
-                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "Uzytkownik", "Id", "Nazwa", autoCreateTables: false);
+                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "Uzytkownicy", "Id", "Nazwa", autoCreateTables: false);
                 }
                 catch (Exception ex)
                 {

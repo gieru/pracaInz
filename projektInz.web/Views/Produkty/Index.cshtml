@@ -1,0 +1,17 @@
+﻿@model System.Collections.Generic.List<projektInz.web.Models.WidokProduktu>
+
+@{
+    ViewBag.Title = "Produkty";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Produkty</h2>
+
+<ul>
+    @foreach (var prod in this.Model)
+    {
+        <li>@prod.Nazwa (@prod.DataWprowadzenia) @Html.ActionLink("Edytuj","EdytujProdukt",new { id = prod.Id })</li>
+    }
+</ul>
+
+@Html.ActionLink("Dodaj","DodajProdukt")

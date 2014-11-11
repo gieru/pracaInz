@@ -1,0 +1,17 @@
+﻿@model projektInz.web.Models.NowyProdukt
+
+@{
+    ViewBag.Title = "Dodaj produkt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Dodaj produkt</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    
+    @Html.LabelFor(m => m.Nazwa)
+    @Html.TextBoxFor(m => m.Nazwa)
+    <input type="submit" value="Dodaj" />
+}

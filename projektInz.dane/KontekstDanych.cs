@@ -19,6 +19,7 @@ namespace projektInz.dane
 
         public DbSet<Użytkownik> Użytkownicy { get; set; }
         public DbSet<Kontrahent> Kontrahenci { get; set; } 
+        public DbSet<Produkt> Produkty { get; set; } 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -33,6 +34,11 @@ namespace projektInz.dane
             kontrahenci.Property(x => x.Imię).HasColumnName("Imie").HasMaxLength(200).IsRequired().IsUnicode();
             kontrahenci.Property(x => x.Nazwisko).HasColumnName("Nazwisko").HasMaxLength(200).IsRequired().IsUnicode();
             kontrahenci.ToTable("Kontrahenci");
+
+            var produkty = modelBuilder.Entity<Produkt>();
+            produkty.HasKey(x => x.Id);
+            produkty.Property(x => x.Nazwa).HasMaxLength(200).IsRequired().IsUnicode();
+            produkty.ToTable("Produkty");
         }
     }
 }

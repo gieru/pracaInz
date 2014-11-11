@@ -1,19 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace projektInz.dane
+﻿namespace projektInz.biznes
 {
     public class Kontrahent
     {
         public int Id { get; set; }
 
-        private string imię;
-
-        public string Imię { get { return imię; } set { imię = value;} }
+        public string Imię { get; set; }
 
         public string Nazwisko { get; set; }
+
+        public Kontrahent()
+        {
+        }
+
+        public Kontrahent(string imię, string nazwisko)
+        {
+            Imię = imię;
+            Nazwisko = nazwisko;
+        }
+
+
     }
 }

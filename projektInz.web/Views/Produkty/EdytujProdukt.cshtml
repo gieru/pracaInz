@@ -1,0 +1,19 @@
+﻿@model projektInz.web.Models.WidokProduktu
+
+@{
+    ViewBag.Title = "Edytuj produkt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edytuj produkt</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    @Html.HiddenFor(m => m.Id)
+    
+    @Html.LabelFor(m => m.Nazwa)
+    @Html.TextBoxFor(m => m.Nazwa)
+    <input type="submit" value="Zapisz" />
+}
