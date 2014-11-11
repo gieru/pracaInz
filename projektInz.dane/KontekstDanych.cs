@@ -31,8 +31,17 @@ namespace projektInz.dane
 
             var kontrahenci = modelBuilder.Entity<Kontrahent>();
             kontrahenci.HasKey(x => x.Id);
-            kontrahenci.Property(x => x.Imię).HasColumnName("Imie").HasMaxLength(200).IsRequired().IsUnicode();
-            kontrahenci.Property(x => x.Nazwisko).HasColumnName("Nazwisko").HasMaxLength(200).IsRequired().IsUnicode();
+            kontrahenci.Property(x => x.Imię).HasColumnName("Imie").HasMaxLength(100).IsRequired().IsUnicode();
+            kontrahenci.Property(x => x.Nazwisko).HasColumnName("Nazwisko").HasMaxLength(100).IsRequired().IsUnicode();
+            kontrahenci.Property(x => x.NazwaFirmy)
+                .HasColumnName("Nazwa Firmy")
+                .HasMaxLength(200)
+                .IsRequired()
+                .IsUnicode();
+            kontrahenci.Property(x => x.Nip);
+            kontrahenci.Property(x => x.Adres).HasMaxLength(200).IsRequired();
+            kontrahenci.Property(x => x.NrTel).HasMaxLength(20).IsRequired();
+            kontrahenci.Property(x => x.Email).HasMaxLength(50).IsRequired();
             kontrahenci.ToTable("Kontrahenci");
 
             var produkty = modelBuilder.Entity<Produkt>();

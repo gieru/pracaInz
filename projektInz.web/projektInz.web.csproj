@@ -166,12 +166,14 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KontrahentController.cs" />
     <Compile Include="Controllers\ProduktyController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\WidokKontrahent.cs" />
     <Compile Include="Models\WidokProduktu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -302,6 +304,7 @@
     <Content Include="Views\Produkty\Index.cshtml" />
     <Content Include="Views\Produkty\DodajProdukt.cshtml" />
     <Content Include="Views\Produkty\EdytujProdukt.cshtml" />
+    <Content Include="Views\Kontrahenci\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\projektInz.biznes\projektInz.biznes.csproj">

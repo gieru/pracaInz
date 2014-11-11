@@ -1,0 +1,21 @@
+﻿@model System.Collections.Generic.List<projektInz.web.Models.WidokKontrahent>
+
+@{
+    ViewBag.Title = "Kontrahenci";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kontrahenci</h2>
+
+<ul>
+    @foreach (var kontr in this.Model)
+    {
+        <li>@kontr.Imię</li>
+        <li>@kontr.Nazwisko</li>
+        <li>@kontr.NazwaFirmy</li>
+        <li>@kontr.Adres</li>
+        <li>@kontr.Nip</li>
+        <li>@kontr.NrTel</li>
+        <li>@kontr.Email</li>
+    }
+</ul>
