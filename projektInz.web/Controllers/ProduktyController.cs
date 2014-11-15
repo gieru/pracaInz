@@ -7,6 +7,7 @@ using projektInz.web.Models;
 
 namespace projektInz.web.Controllers
 {
+    [Authorize(Roles = "Magazynier")]
     public class ProduktyController : Controller
     {
         public ActionResult Index()

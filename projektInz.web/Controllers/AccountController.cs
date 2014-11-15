@@ -16,7 +16,6 @@ using projektInz.biznes;
 namespace projektInz.web.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
