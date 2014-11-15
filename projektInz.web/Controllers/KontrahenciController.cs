@@ -7,7 +7,7 @@ using projektInz.web.Models;
 
 namespace projektInz.web.Controllers
 {
-    public class KontrahentController : Controller
+    public class KontrahenciController : Controller
     {
         public ActionResult Index()
         {
@@ -27,7 +27,7 @@ namespace projektInz.web.Controllers
                 Adres = kontrahent.Adres,
                 NrTel = kontrahent.NrTel,
                 Email = kontrahent.Email
-            }).ToString();
+            }).ToList();
 
             return View(widoki);
         }
