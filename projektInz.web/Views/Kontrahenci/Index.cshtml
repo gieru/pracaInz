@@ -7,15 +7,32 @@
 
 <h2>Kontrahenci</h2>
 
-<ul>
-    @foreach (var kontr in this.Model)
-    {
-        <li>@kontr.Imię</li>
-        <li>@kontr.Nazwisko</li>
-        <li>@kontr.NazwaFirmy</li>
-        <li>@kontr.Adres</li>
-        <li>@kontr.Nip</li>
-        <li>@kontr.NrTel</li>
-        <li>@kontr.Email</li>
-    }
-</ul>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Nazwa Firmy</th>
+                <th>Adres</th>
+                <th>Nip</th>
+                <th>Nr. Telefonu</th>
+                <th>E-mail</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var kontr in this.Model)
+            {
+                <tr>
+                    <td>@kontr.Imię</td>
+                    <td>@kontr.Nazwisko</td>
+                    <td>@kontr.NazwaFirmy</td>
+                    <td>@kontr.Adres</td>
+                    <td>@kontr.Nip</td>
+                    <td>@kontr.NrTel</td>
+                    <td>@kontr.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -44,7 +44,9 @@ namespace projektInz.web
 
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
                 "~/Content/bootstrap.css",
-                "~/Content/bootstrap-theme.css"));
+                "~/Content/bootstrap-theme.css",
+                "~/Content/dataTables.bootstrap.css",
+                "~/Content/sb-admin-2.css"));
         }
     }
 }
