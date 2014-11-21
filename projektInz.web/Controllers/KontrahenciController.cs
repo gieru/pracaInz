@@ -7,7 +7,7 @@ using projektInz.web.Models;
 
 namespace projektInz.web.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "admin")]
     public class KontrahenciController : Controller
     {
         public ActionResult Index()

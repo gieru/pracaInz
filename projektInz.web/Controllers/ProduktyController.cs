@@ -8,7 +8,7 @@ using projektInz.web.Models;
 
 namespace projektInz.web.Controllers
 {
-    [Authorize(Roles = "Magazynier")]
+    [Authorize(Roles = "admin")]
     public class ProduktyController : Controller
     {
         public ActionResult Index()
@@ -99,8 +99,8 @@ namespace projektInz.web.Controllers
                 return View();
             }
             using (var dane = new KontekstDanych())
-            {
-                var produkt = new Produkt(nowyProdukt.Nazwa,
+            { 
+                var produkt = dane.Produkty.Add(nowyProdukt.Nazwa,
                     nowyProdukt.Grupa,
                     nowyProdukt.CenaSprzedazy,
                     nowyProdukt.CenaZakupu,

@@ -10,8 +10,18 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
-    
+<br/>    
     @Html.LabelFor(m => m.Nazwa)
-    @Html.TextBoxFor(m => m.Nazwa)
+    @Html.TextBoxFor(m => m.Nazwa)    
+<br/>       
+    @Html.LabelFor(m => m.Stan)
+    @Html.TextBoxFor(m => m.Stan)   
+<br/>        
+    @Html.LabelFor(m => m.CenaZakupu)
+    @Html.TextBoxFor(m => m.CenaZakupu)   
+<br/>        
+    @Html.LabelFor(m => m.CenaSprzedazy)
+    @Html.TextBoxFor(m => m.CenaSprzedazy)   
+<br/>   
     <input type="submit" value="Dodaj" />
 }

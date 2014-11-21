@@ -11,7 +11,7 @@ namespace projektInz.web.Models
         public decimal Stan { get; set; }
         public decimal CenaZakupu { get; set; }
         public decimal CenaSprzedazy { get; set; }
-        
+
     }
 
     public class NowyProdukt
