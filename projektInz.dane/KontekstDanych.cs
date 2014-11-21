@@ -38,7 +38,7 @@ namespace projektInz.dane
                 .HasMaxLength(200)
                 .IsRequired()
                 .IsUnicode();
-            kontrahenci.Property(x => x.Nip);
+            kontrahenci.Property(x => x.Nip).HasMaxLength(13).IsRequired();
             kontrahenci.Property(x => x.Adres).HasMaxLength(200).IsRequired();
             kontrahenci.Property(x => x.NrTel).HasMaxLength(20).IsRequired();
             kontrahenci.Property(x => x.Email).HasMaxLength(50).IsRequired();
@@ -47,6 +47,10 @@ namespace projektInz.dane
             var produkty = modelBuilder.Entity<Produkt>();
             produkty.HasKey(x => x.Id);
             produkty.Property(x => x.Nazwa).HasMaxLength(200).IsRequired().IsUnicode();
+            produkty.Property(x => x.Grupa).HasMaxLength(50).IsRequired().IsUnicode();
+            produkty.Property(x => x.Stan).IsRequired();
+            produkty.Property(x => x.CenaZakupu).IsRequired();
+            produkty.Property(x => x.CenaSprzedazy).IsRequired();
             produkty.ToTable("Produkty");
         }
     }

@@ -7,6 +7,11 @@ namespace projektInz.web.Models
         public int Id { get; set; }
         public string Nazwa { get; set; }
         public string DataWprowadzenia { get; set; }
+        public string Grupa { get; set; }
+        public decimal Stan { get; set; }
+        public decimal CenaZakupu { get; set; }
+        public decimal CenaSprzedazy { get; set; }
+        
     }
 
     public class NowyProdukt
@@ -14,6 +19,10 @@ namespace projektInz.web.Models
         [MinLength(3)]
         [Required]
         public string Nazwa { get; set; }
+        public string Grupa { get; set; }
+        public decimal Stan { get; set; }
+        public decimal CenaZakupu { get; set; }
+        public decimal CenaSprzedazy { get; set; }
     }
 
     public class EdytowanyProdukt
@@ -22,5 +31,9 @@ namespace projektInz.web.Models
         [MinLength(3)]
         [Required]
         public string Nazwa { get; set; }
+        public string Grupa { get; set; }
+        public decimal Stan { get; set; }
+        public decimal CenaZakupu { get; set; }
+        public decimal CenaSprzedazy { get; set; }
     }
 }

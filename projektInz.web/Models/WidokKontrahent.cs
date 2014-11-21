@@ -8,7 +8,7 @@ namespace projektInz.web.Models
         public string Imię { get; set; }
         public string Nazwisko { get; set; }
         public string NazwaFirmy { get; set; }
-        public int Nip { get; set; }
+        public string Nip { get; set; }
         public string Adres { get; set; }
         public string NrTel { get; set; }
         public string Email { get; set; }

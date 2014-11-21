@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Web.Mvc;
 using projektInz.biznes;
 using projektInz.dane;
@@ -52,8 +53,12 @@ namespace projektInz.web.Controllers
             }
             return View(new WidokProduktu
             {
-                Id = produkt.Id,
                 Nazwa = produkt.Nazwa,
+                Grupa = produkt.Grupa,
+                Stan = produkt.Stan,
+                CenaZakupu = produkt.CenaZakupu,
+                CenaSprzedazy = produkt.CenaSprzedazy,
+                Id = produkt.Id,
                 DataWprowadzenia = produkt.DataWprowadzenia.ToShortDateString()
             });
         }
@@ -68,7 +73,12 @@ namespace projektInz.web.Controllers
             using (var dane = new KontekstDanych())
             {
                 var produkt = dane.Produkty.Single(x => x.Id == edytowanyProdukt.Id);
-                produkt.ZmieńNazwę(edytowanyProdukt.Nazwa);
+                produkt.ZmieńNazwę(edytowanyProdukt.Nazwa,
+                    edytowanyProdukt.Grupa, 
+                    edytowanyProdukt.CenaSprzedazy, 
+                    edytowanyProdukt.CenaZakupu, 
+                    edytowanyProdukt.Stan);
+
                 //Wysyła zmiany do bazy
                 dane.SaveChanges();
             }
@@ -90,7 +100,11 @@ namespace projektInz.web.Controllers
             }
             using (var dane = new KontekstDanych())
             {
-                var produkt = new Produkt(nowyProdukt.Nazwa);
+                var produkt = new Produkt(nowyProdukt.Nazwa,
+                    nowyProdukt.Grupa,
+                    nowyProdukt.CenaSprzedazy,
+                    nowyProdukt.CenaZakupu,
+                    nowyProdukt.Stan);
                 //Dodaje nowy produkt do unit of work, ale jeszcze nie do bazy danych
                 dane.Produkty.Add(produkt);
                 //Wysyła zmiany do bazy
