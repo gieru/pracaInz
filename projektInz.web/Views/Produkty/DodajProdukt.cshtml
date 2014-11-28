@@ -6,22 +6,29 @@
 }
 
 <h2>Dodaj produkt</h2>
-@using (Html.BeginForm())
+@using (Html.BeginForm("DodajProdukt", "Produkty", FormMethod.Post, new { role = "form" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
-<br/>    
-    @Html.LabelFor(m => m.Nazwa)
-    @Html.TextBoxFor(m => m.Nazwa)    
-<br/>       
-    @Html.LabelFor(m => m.Stan)
-    @Html.TextBoxFor(m => m.Stan)   
-<br/>        
-    @Html.LabelFor(m => m.CenaZakupu)
-    @Html.TextBoxFor(m => m.CenaZakupu)   
-<br/>        
-    @Html.LabelFor(m => m.CenaSprzedazy)
-    @Html.TextBoxFor(m => m.CenaSprzedazy)   
-<br/>   
-    <input type="submit" value="Dodaj" />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nazwa)
+        @Html.TextBoxFor(m => m.Nazwa, new { @class = "form-control", placeholder = "Wprowadź nazwę"})    
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Grupa)
+        @Html.TextBoxFor(m => m.Grupa)    
+    </div>
+    <div class="form-group">       
+        @Html.LabelFor(m => m.Stan)
+        @Html.TextBoxFor(m => m.Stan)   
+    </div>
+    <div class="form-group">     
+        @Html.LabelFor(m => m.CenaZakupu)
+        @Html.TextBoxFor(m => m.CenaZakupu)   
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.CenaSprzedazy)
+        @Html.TextBoxFor(m => m.CenaSprzedazy)   
+    </div>   
+    <input type="submit" class="btn btn-default" value="Dodaj" />
 }

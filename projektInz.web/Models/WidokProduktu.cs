@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace projektInz.web.Models
 {
@@ -19,8 +20,10 @@ namespace projektInz.web.Models
         [MinLength(3)]
         [Required]
         public string Nazwa { get; set; }
+        [Required]
         public string Grupa { get; set; }
         public decimal Stan { get; set; }
+        [Description("Cena zakupu")]
         public decimal CenaZakupu { get; set; }
         public decimal CenaSprzedazy { get; set; }
     }

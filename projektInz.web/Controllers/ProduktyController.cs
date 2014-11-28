@@ -73,7 +73,7 @@ namespace projektInz.web.Controllers
             using (var dane = new KontekstDanych())
             {
                 var produkt = dane.Produkty.Single(x => x.Id == edytowanyProdukt.Id);
-                produkt.ZmieńNazwę(edytowanyProdukt.Nazwa,
+                produkt.zmienProdukt(edytowanyProdukt.Nazwa,
                     edytowanyProdukt.Grupa, 
                     edytowanyProdukt.CenaSprzedazy, 
                     edytowanyProdukt.CenaZakupu, 
@@ -100,7 +100,7 @@ namespace projektInz.web.Controllers
             }
             using (var dane = new KontekstDanych())
             { 
-                var produkt = dane.Produkty.Add(nowyProdukt.Nazwa,
+                var produkt = new Produkt(nowyProdukt.Nazwa,
                     nowyProdukt.Grupa,
                     nowyProdukt.CenaSprzedazy,
                     nowyProdukt.CenaZakupu,
