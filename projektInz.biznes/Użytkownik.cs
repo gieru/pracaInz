@@ -10,5 +10,7 @@ namespace projektInz.biznes
     {
         public int Id { get; set; }
         public string Nazwa { get; set; }
+       //ublic string Imię { get; set; }
+        //public string Nazwisko { get; set; }
     }
 }

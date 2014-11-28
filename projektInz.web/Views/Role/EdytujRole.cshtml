@@ -1,0 +1,32 @@
+﻿@model projektInz.web.Models.WidokRólUżytkownika
+
+@{
+    ViewBag.Title = "EdytujRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EdytujRole</h2>
+
+@using (Html.BeginForm("EdytujRole","Role",FormMethod.Post))
+{
+    Html.ValidationSummary(true);
+    <ul>
+        @foreach (var rola in Model.Role)
+        {
+            <li><label>
+                @Html.CheckBox("Role["+ rola.Key + "]", rola.Value)
+                @rola.Key
+                </label>
+            
+            </li>
+        }
+    </ul>
+    @Html.Hidden("Login",Model.NazwaWyświetlana)
+    <p>
+        <input type="submit" value="Save" />
+    </p>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
