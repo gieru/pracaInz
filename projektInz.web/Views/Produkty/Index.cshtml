@@ -5,37 +5,41 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Produkty</h2>
+<div class="row">
+    <div class="col-lg-12">
+        <h2>Produkty</h2>
 
-<div class="table-responsive">
-    <table class="table table-striped table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nazwa Produktu</th>
-                <th>Stan</th>
-                <th>Cena Zakupu</th>
-                <th>Cena Sprzedaży</th>
-                <th>Data Wprowadzenia</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var prod in this.Model)
-            {
-                <tr>
-                    <td>@prod.Id</td>
-                    <td>@prod.Nazwa</td>
-                    <td>@prod.Stan</td>
-                    <td>@prod.CenaZakupu</td>
-                    <td>@prod.CenaSprzedazy</td>
-                    <td>@prod.DataWprowadzenia</td>
-                    <td>@Html.ActionLink("Edytuj","EdytujProdukt",new { id = prod.Id })</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nazwa Produktu</th>
+                        <th>Stan</th>
+                        <th>Cena Zakupu</th>
+                        <th>Cena Sprzedaży</th>
+                        <th>Data Wprowadzenia</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var prod in this.Model)
+                    {
+                        <tr>
+                            <td>@prod.Id</td>
+                            <td>@prod.Nazwa</td>
+                            <td>@prod.Stan</td>
+                            <td>@prod.CenaZakupu</td>
+                            <td>@prod.CenaSprzedazy</td>
+                            <td>@prod.DataWprowadzenia</td>
+                            <td>@Html.ActionLink("Edytuj","EdytujProdukt",new { id = prod.Id })</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        @Html.ActionLink("Dodaj","DodajProdukt")
+    </div>
 </div>
-
-@Html.ActionLink("Dodaj","DodajProdukt")
 

@@ -6,47 +6,90 @@
         <title>Hurtownia</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
         @Styles.Render("~/Content/bootstrap")
         @Scripts.Render("~/bundles/modernizr")
     </head>
     <body>
-        <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+
+        <div id="wrapper">
+
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Hurtownia", "Index", "Home",new {@class = "navbar-brand"})
                 </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
+
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="@Url.Action("Manage","Account")">
+                                    Zmień hasło
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#" id="logOffButton" >
+                                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                                    Wyloguj
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                @using (Html.BeginForm("LogOff", "Account",FormMethod.Post, new {id = "logOffForm"}))
+                {
+                    @Html.AntiForgeryToken()
+                }
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">
+                            <li class="sidebar-search">
+                                <div class="input-group custom-search-form">
+                                    <input type="text" class="form-control" placeholder="Search...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">
+                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <!-- /input-group -->
+                            </li>
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             @foreach (var link in Html.Menu())
                             {
                                 <li>@link</li>
                             }
                         </ul>
-                    </nav>
+                    </div>
                 </div>
-            </div>
-        </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
-        </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
-                </div>
-            </div>
-        </footer>
+            </nav>
 
+            <!-- Page Content -->
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                @RenderBody()
+                </div>
+            </div>
+
+        </div>
         @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)
+        <script type="text/ecmascript">
+            $(function () {
+                $("#logOffButton").click(function (e) {
+                    e.preventDefault();
+                    $("#logOffForm").submit();
+                });
+            });
+        </script>
     </body>
 </html>
