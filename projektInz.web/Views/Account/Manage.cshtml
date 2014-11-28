@@ -1,4 +1,4 @@
-﻿@model projektInz.web.Models.LocalPasswordModel
+﻿@model projektInz.web.Models.WidokUżytkownika
 @{
     ViewBag.Title = "Manage Account";
 }
@@ -11,13 +11,12 @@
 
 <p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
 
-@if (ViewBag.HasLocalPassword)
+@Html.Partial("_ChangePasswordPartial",Model.Hasło)
+
+<h2>Twoje role</h2>
+@foreach (var rola in Model.Role)
 {
-    @Html.Partial("_ChangePasswordPartial")
-}
-else
-{ 
-    @Html.Partial("_SetPasswordPartial")
+    @rola
 }
 
 @section Scripts {
