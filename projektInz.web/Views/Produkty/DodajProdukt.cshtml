@@ -12,23 +12,23 @@
     @Html.ValidationSummary()
     <div class="form-group">
         @Html.LabelFor(m => m.Nazwa)
-        @Html.TextBoxFor(m => m.Nazwa, new { @class = "form-control", placeholder = "Wprowadź nazwę"})    
+        @Html.TextBoxFor(m => m.Nazwa, new { @class = "form-control", placeholder = "Wprowadź nazwę" })
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Grupa)
-        @Html.TextBoxFor(m => m.Grupa)    
+        @Html.TextBoxFor(m => m.Grupa, new { @class = "form-control", placeholder = "Wprowadź nazwę grupy produktu" })
     </div>
-    <div class="form-group">       
+    <div class="form-group">
         @Html.LabelFor(m => m.Stan)
-        @Html.TextBoxFor(m => m.Stan)   
+        @Html.TextBoxFor(m => m.Stan, new { @class = "form-control", placeholder = "Wprowadz stan" })
     </div>
-    <div class="form-group">     
+    <div class="form-group">
         @Html.LabelFor(m => m.CenaZakupu)
-        @Html.TextBoxFor(m => m.CenaZakupu)   
+        @Html.TextBoxFor(m => m.CenaZakupu, new { @class = "form-control", placeholder = "Podaj cene zakupu towaru" })
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.CenaSprzedazy)
-        @Html.TextBoxFor(m => m.CenaSprzedazy)   
+        @Html.TextBoxFor(m => m.CenaSprzedazy, new { @class = "form-control", placeholder = "Podaj cene sprzedaży" })
     </div>   
     <input type="submit" class="btn btn-default" value="Dodaj" />
 }

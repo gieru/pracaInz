@@ -21,18 +21,6 @@ namespace projektInz.web.Controllers
                 wszystkieProdukty = dane.Produkty.ToList();
             }
 
-            //var widoki = new List<WidokProduktu>();
-            //foreach (var produkt in wszystkieProdukty)
-            //{
-            //    var widok = new WidokProduktu
-            //    {
-            //        Nazwa = produkt.Nazwa,
-            //        DataWprowadzenia = produkt.DataWprowadzenia.ToShortDateString()
-
-            //    };
-            //    widoki.Add(widok);
-            //}
-
             var widoki = wszystkieProdukty.Select(produkt => new WidokProduktu
             {
                 Id = produkt.Id,

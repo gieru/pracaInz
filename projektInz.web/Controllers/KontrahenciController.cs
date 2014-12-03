@@ -32,5 +32,34 @@ namespace projektInz.web.Controllers
 
             return View(widoki);
         }
+
+        public ActionResult DodajKontrahenta()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DodajKontrahenta(NowyKontrahent nowyKontrahent)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            using (var dane = new KontekstDanych())
+            {
+                var kontrahent = new Kontrahent(
+                    nowyKontrahent.Imię,
+                    nowyKontrahent.Nazwisko,
+                    nowyKontrahent.NazwaFirmy,
+                    nowyKontrahent.Nip,
+                    nowyKontrahent.Adres,
+                    nowyKontrahent.NrTel,
+                    nowyKontrahent.Email
+                    );
+                dane.Kontrahenci.Add(kontrahent);
+                dane.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
