@@ -1,0 +1,20 @@
+﻿@model projektInz.web.Models.WidokKontrahent
+
+@{
+    ViewBag.Title = "Edytuj Kontrahenta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edytuj Kontrahenta</h2>
+    
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    @Html.HiddenFor(m => m.Id)
+    
+    @Html.LabelFor(m => m.Imię)
+    @Html.TextBoxFor(m => m.Imię)
+    <input type="submit" value="Zapisz" />
+}

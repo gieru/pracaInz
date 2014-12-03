@@ -14,7 +14,7 @@
         public Kontrahent()
         {
         }
-
+        //dodawanie kontrahenta
         public Kontrahent(string imię, string nazwisko, string firma, string nip, string adres,
             string tel, string email)
         {
@@ -26,7 +26,18 @@
             NrTel = tel;
             Email = email;
         }
-
+        //edycja kontrahenta
+        public void ZmienKontrahent(string noweImię, string noweNazwisko, string noweFirma, string nowyNip, 
+            string nowyAdres, string nowyTel, string nowyEmail)
+        {
+            Imię = noweImię;
+            Nazwisko = noweNazwisko;
+            NazwaFirmy = noweFirma;
+            Nip = nowyNip;
+            Adres = nowyAdres;
+            NrTel = nowyTel;
+            Email = nowyEmail;
+        }
 
     }
 }

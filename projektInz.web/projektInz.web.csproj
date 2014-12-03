@@ -305,6 +305,7 @@
     <Content Include="Views\Kontrahenci\Index.cshtml" />
     <Content Include="Views\Role\EdytujRole.cshtml" />
     <Content Include="Views\Kontrahenci\DodajKontrahenta.cshtml" />
+    <Content Include="Views\Kontrahenci\EdytujKontrahent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\projektInz.biznes\projektInz.biznes.csproj">

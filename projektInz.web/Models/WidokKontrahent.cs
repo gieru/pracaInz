@@ -36,4 +36,19 @@ namespace projektInz.web.Models
         public string NrTel { get; set; }
         public string Email { get; set; }
     }
+
+    public class EdytowanyKontrahent
+    {
+        public int Id { get; set; }
+        [MinLength(3)]
+        [Required]
+        public string Imię { get; set; }
+        public string Nazwisko { get; set; }
+        public string NazwaFirmy { get; set; }
+        public string Nip { get; set; }
+        public string Adres { get; set; }
+        public string NrTel { get; set; }
+        public string Email { get; set; }
+
+    }
 }

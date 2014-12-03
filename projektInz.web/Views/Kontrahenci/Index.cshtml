@@ -32,7 +32,7 @@
                     <td>@kontr.Nip</td>
                     <td>@kontr.NrTel</td>
                     <td>@kontr.Email</td>
-                    <td>EDYTUJ</td>
+                    <td>@Html.ActionLink("Edytuj","EdytujKontrahent",new { id = kontr.Id })</td>
                 </tr>
             }
         </tbody>
