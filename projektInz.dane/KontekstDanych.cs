@@ -35,19 +35,19 @@ namespace projektInz.dane
             kontrahenci.Property(x => x.Nazwisko).HasColumnName("Nazwisko").HasMaxLength(100).IsRequired().IsUnicode();
             kontrahenci.Property(x => x.NazwaFirmy)
                 .HasColumnName("Nazwa Firmy")
-                .HasMaxLength(200)
+                .HasMaxLength(250)
                 .IsRequired()
                 .IsUnicode();
             kontrahenci.Property(x => x.Nip).HasMaxLength(13).IsRequired();
-            kontrahenci.Property(x => x.Adres).HasMaxLength(200).IsRequired();
+            kontrahenci.Property(x => x.Adres).HasMaxLength(250).IsRequired();
             kontrahenci.Property(x => x.NrTel).HasMaxLength(20).IsRequired();
-            kontrahenci.Property(x => x.Email).HasMaxLength(50).IsRequired();
+            kontrahenci.Property(x => x.Email).HasMaxLength(70).IsRequired();
             kontrahenci.ToTable("Kontrahenci");
 
             var produkty = modelBuilder.Entity<Produkt>();
             produkty.HasKey(x => x.Id);
             produkty.Property(x => x.Nazwa).HasMaxLength(200).IsRequired().IsUnicode();
-            produkty.Property(x => x.Grupa).HasMaxLength(50).IsRequired().IsUnicode();
+            produkty.Property(x => x.Grupa).HasMaxLength(200).IsRequired().IsUnicode();
             produkty.Property(x => x.Stan).IsRequired();
             produkty.Property(x => x.CenaZakupu).IsRequired();
             produkty.Property(x => x.CenaSprzedazy).IsRequired();

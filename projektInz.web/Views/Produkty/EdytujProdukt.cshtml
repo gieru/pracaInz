@@ -6,14 +6,39 @@
 }
 
 <h2>Edytuj produkt</h2>
-@using (Html.BeginForm())
+
+@using (Html.BeginForm("EdytujProdukt", "Produkty", FormMethod.Post, new {role = "form"} ))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
-
-    @Html.HiddenFor(m => m.Id)
     
-    @Html.LabelFor(m => m.Nazwa)
-    @Html.TextBoxFor(m => m.Nazwa)
-    <input type="submit" value="Zapisz" />
+    <div class="form-group">
+        @Html.HiddenFor(m => m.Id)
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nazwa)
+        @Html.TextBoxFor(m => m.Nazwa, new { @class = "form-control", placeholder = "Wprowadź nazwę" })
+    </div>    
+    
+     <div class="form-group">
+        @Html.LabelFor(m => m.Grupa)
+        @Html.TextBoxFor(m => m.Grupa,new { @class = "form-control", placeholder = "Wprowadź nazwę grupy towaru" })  
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.Stan)
+        @Html.TextBoxFor(m => m.Stan,new { @class = "form-control", placeholder = "Wprowadź stan" }) 
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.CenaZakupu)
+        @Html.TextBoxFor(m => m.CenaZakupu,new { @class = "form-control", placeholder = "Wprowadź cene zakupu towaru" })
+    </div> 
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.CenaSprzedazy)
+        @Html.TextBoxFor(m => m.CenaSprzedazy,new { @class = "form-control", placeholder = "Wprowadź cene sprzedaży towaru" }) 
+    </div>
+    <input type="submit" class="btn btn-info btn-circle btn-xl" value="+" />
 }
