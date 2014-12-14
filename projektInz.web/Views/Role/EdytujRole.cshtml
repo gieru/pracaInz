@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>EdytujRole</h2>
+<h2>Edytuj role użytkownika @Model.NazwaWyświetlana</h2>
 
 @using (Html.BeginForm("EdytujRole", "Role", FormMethod.Post))
 {
@@ -25,7 +25,8 @@
             </li>
         }
     </ul>
-    @Html.Hidden("Login", Model.NazwaWyświetlana)
+    @Html.Hidden("Id", Model.Id)
+    @Html.Hidden("Login", Model.Login)
     <p>
         <input type="submit" value="Save" />
     </p>

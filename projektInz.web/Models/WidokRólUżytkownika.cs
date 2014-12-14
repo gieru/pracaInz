@@ -5,6 +5,8 @@ namespace projektInz.web.Models
     public class WidokRólUżytkownika
     {
         public string NazwaWyświetlana { get; set; }
+        public string Login { get; set; }
+        public int Id { get; set; }
         public List<RolaUzytkownika> Role { get; set; } 
     }
 
@@ -19,6 +21,7 @@ namespace projektInz.web.Models
     public class NoweRole
     {
         public string Login { get; set; }
-        public Dictionary<string, bool> Role { get; set; } 
+        public Dictionary<string, bool> Role { get; set; }
+        public int Id { get; set; }
     }
 }

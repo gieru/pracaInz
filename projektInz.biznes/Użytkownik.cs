@@ -12,5 +12,28 @@ namespace projektInz.biznes
         public string Login { get; set; }
         public string Imię { get; set; }
         public string Nazwisko { get; set; }
+
+        public Użytkownik(string login, string imię, string nazwisko)
+        {
+            if (login == null)
+            {
+                throw new ArgumentNullException("login");
+            }
+            if (imię == null)
+            {
+                throw new ArgumentNullException("imię");
+            }
+            if (nazwisko == null)
+            {
+                throw new ArgumentNullException("nazwisko");
+            }
+            Login = login;
+            Imię = imię;
+            Nazwisko = nazwisko;
+        }
+
+        public Użytkownik()
+        {
+        }
     }
 }

@@ -29,7 +29,9 @@ namespace projektInz.web.Controllers
 
             return View(new WidokRólUżytkownika()
             {
-                NazwaWyświetlana = użytkownik.Login,
+                NazwaWyświetlana = użytkownik.Imię + " " + użytkownik.Nazwisko,
+                Login = użytkownik.Login,
+                Id = użytkownik.Id,
                 Role = wszystkieRole.Select(x => new RolaUzytkownika
                 {
                     CzyMaRole = role.Contains(x),
@@ -50,7 +52,6 @@ namespace projektInz.web.Controllers
             var roleModel = model.Role ?? new Dictionary<string, bool>();
             var noweRole = roleModel.Where(x => x.Value).Select(x => x.Key).ToArray();
             var stareRole = Roles.GetRolesForUser(model.Login);
-            var wszystkieRole = Roles.GetAllRoles();
 
             var roleDoUsuniecia = stareRole.Except(noweRole).Except(RoleWbudowane).ToArray();
             var roleDoDodania = noweRole.Except(stareRole).ToArray();
@@ -64,17 +65,7 @@ namespace projektInz.web.Controllers
                 Roles.AddUsersToRoles(new[] { model.Login }, roleDoDodania);
             }
 
-            var role = Roles.GetRolesForUser(model.Login);
-            return View(new WidokRólUżytkownika()
-            {
-                NazwaWyświetlana = model.Login,
-                Role = wszystkieRole.Select(x => new RolaUzytkownika
-                {
-                    CzyMaRole = role.Contains(x),
-                    Nazwa = x,
-                    CzyMoznaEdytowac = CzyMoznaEdytowac(role, x)
-                }).ToList()
-            });
+            return RedirectToAction("Index", "Uzytkownicy", new {id = model.Id});
         }
 
     }

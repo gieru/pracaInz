@@ -16,7 +16,8 @@ namespace projektInz.web.Helpers
         private static Type[] kontrolery =
         {
             typeof(ProduktyController),
-            typeof(KontrahenciController)
+            typeof(KontrahenciController),
+            typeof(UzytkownicyController),
         };
 
    

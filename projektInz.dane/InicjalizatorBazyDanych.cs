@@ -1,4 +1,5 @@
 using System.Data.Entity;
+using System.Linq;
 using System.Web.Security;
 using projektInz.biznes;
 
@@ -10,14 +11,17 @@ namespace projektInz.dane
         {
             base.InitializeDatabase(context);
 
-            var admin = new U¿ytkownik()
+            var adminIstnieje = context.U¿ytkownicy.Any(x => x.Login == "admin");
+            if (!adminIstnieje)
             {
-                Login = "admin",
-                Imiê = "admin",
-                Nazwisko = "admin"
-            };
-
-            context.U¿ytkownicy.Add(admin);
+                var admin = new U¿ytkownik()
+                {
+                    Login = "admin",
+                    Imiê = "admin",
+                    Nazwisko = "admin"
+                };
+                context.U¿ytkownicy.Add(admin);
+            }
             context.SaveChanges();
         }
     }

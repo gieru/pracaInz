@@ -1,0 +1,41 @@
+﻿@model List<projektInz.web.Models.IstniejacyUzytkownik>
+
+@{
+    ViewBag.Title = "Użytkownicy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h2>Użytkownicy</h2>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Login</th>
+                        <th>Imię</th>
+                        <th>Nazwisko</th>
+                        <th>Role</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var u in this.Model)
+                    {
+                        <tr>
+                            <td>@u.Login</td>
+                            <td>@u.Imie</td>
+                            <td>@u.Nazwisko</td>
+                            <td>@u.Role</td>
+                            <td>@Html.ActionLink("Edytuj role", "EdytujRole","Role", new { id = u.Id }, null)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        @Html.ActionLink("Dodaj","Dodaj")
+    </div>
+</div>
+

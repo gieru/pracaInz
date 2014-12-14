@@ -1,4 +1,6 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Infrastructure.Annotations;
+using System.Data.Entity.ModelConfiguration;
 using projektInz.biznes;
 using System;
 using System.Collections.Generic;
@@ -25,9 +27,15 @@ namespace projektInz.dane
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Użytkownik>()
+            var uzytkownicy = modelBuilder.Entity<Użytkownik>()
                 .HasKey(x => x.Id)
                 .ToTable("Uzytkownicy");
+
+            uzytkownicy
+                .Property(x => x.Login).HasMaxLength(30).IsRequired().HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(
+                        new IndexAttribute("IX_Login", 1) {IsUnique = true}));
 
             var kontrahenci = modelBuilder.Entity<Kontrahent>();
             kontrahenci.HasKey(x => x.Id);
