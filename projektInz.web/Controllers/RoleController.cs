@@ -10,6 +10,7 @@ using projektInz.web.Models;
 
 namespace projektInz.web.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class RoleController : Controller
     {
         //
@@ -44,11 +45,11 @@ namespace projektInz.web.Controllers
 
             if (roleDoUsuniecia.Any())
             {
-                Roles.RemoveUsersFromRoles(new[] {model.Login}, roleDoUsuniecia);
+                Roles.RemoveUsersFromRoles(new[] { model.Login }, roleDoUsuniecia);
             }
             if (roleDoDodania.Any())
             {
-                Roles.AddUsersToRoles(new[] {model.Login}, roleDoDodania);
+                Roles.AddUsersToRoles(new[] { model.Login }, roleDoDodania);
             }
 
             return View(new WidokRólUżytkownika()

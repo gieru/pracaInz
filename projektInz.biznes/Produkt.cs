@@ -28,7 +28,7 @@ namespace projektInz.biznes
         }
 
         //edytacja produktu
-        public void zmienProdukt(string nowaNazwa, string nowaGrupa, decimal nowyStan, decimal nowaCenaZakupu,
+        public void ZmienProdukt(string nowaNazwa, string nowaGrupa, decimal nowyStan, decimal nowaCenaZakupu,
             decimal nowaCenaSprzedazy)
         {
             DataWprowadzenia = DateTime.Now;
