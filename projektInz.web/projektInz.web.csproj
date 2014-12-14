@@ -169,6 +169,7 @@
     <Compile Include="Controllers\KontrahenciController.cs" />
     <Compile Include="Controllers\ProduktyController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\UzytkownicyController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

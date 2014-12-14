@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Linq;
 using System.Threading;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -30,7 +31,24 @@ namespace projektInz.web.Filters
                 try
                 {
                     new KontekstDanych().Database.Initialize(true);
-                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "Uzytkownicy", "Id", "Nazwa", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection("DefaultConnection", "Uzytkownicy", "Id", "Login", autoCreateTables: true);
+
+                    var roleDomyslne = new[] {"admin","sprzedawca","magazynier"};
+                    var roleIstniejace = Roles.GetAllRoles();
+
+                    foreach (var brakujacaRola in roleDomyslne.Except(roleIstniejace))
+                    {
+                        Roles.CreateRole(brakujacaRola);
+                        
+                    }
+                    if (!Roles.IsUserInRole("admin", "admin"))
+                    {
+                        Roles.AddUserToRole("admin", "admin");
+                    }
+                    if (WebSecurity.GetCreateDate("admin") == DateTime.MinValue)
+                    {
+                        WebSecurity.CreateAccount("admin", "admin1");
+                    }
                 }
                 catch (Exception ex)
                 {

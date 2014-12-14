@@ -35,6 +35,10 @@ namespace projektInz.web.Controllers
         {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
+                if (WebSecurity.GetPasswordChangedDate(model.UserName) == WebSecurity.GetCreateDate(model.UserName))
+                {
+                    return RedirectToAction("Manage");
+                }
                 return RedirectToLocal(returnUrl);
             }
 

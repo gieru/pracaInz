@@ -14,7 +14,7 @@ namespace projektInz.dane
         public KontekstDanych()
             : base("DefaultConnection")
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<KontekstDanych>());
+            Database.SetInitializer(new InicjalizatorBazyDanych());
         }
 
         public DbSet<Użytkownik> Użytkownicy { get; set; }

@@ -7,21 +7,25 @@
 
 <h2>EdytujRole</h2>
 
-@using (Html.BeginForm("EdytujRole","Role",FormMethod.Post))
+@using (Html.BeginForm("EdytujRole", "Role", FormMethod.Post))
 {
     Html.ValidationSummary(true);
     <ul>
         @foreach (var rola in Model.Role)
         {
-            <li><label>
-                @Html.CheckBox("Role["+ rola.Key + "]", rola.Value)
-                @rola.Key
+            <li>
+                <label>
+                    @if (rola.CzyMoznaEdytowac)
+                    {
+                        @Html.CheckBox("Role[" + rola.Nazwa + "]", rola.CzyMaRole)
+                    }
+                    @rola.Nazwa
                 </label>
-            
+
             </li>
         }
     </ul>
-    @Html.Hidden("Login",Model.NazwaWyświetlana)
+    @Html.Hidden("Login", Model.NazwaWyświetlana)
     <p>
         <input type="submit" value="Save" />
     </p>

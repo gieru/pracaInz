@@ -13,6 +13,7 @@ namespace projektInz.web.Controllers
     [Authorize(Roles = "admin")]
     public class RoleController : Controller
     {
+        private string[] RoleWbudowane = new string[] { "admin" };
         //
         // GET: /Role/
         [HttpGet]
@@ -23,24 +24,35 @@ namespace projektInz.web.Controllers
             {
                 użytkownik = dane.Użytkownicy.Single(x => x.Id == id);
             }
-            var role = Roles.GetRolesForUser(User.Identity.Name);
+            var role = Roles.GetRolesForUser(użytkownik.Login);
             var wszystkieRole = Roles.GetAllRoles();
 
             return View(new WidokRólUżytkownika()
             {
-                NazwaWyświetlana = użytkownik.Nazwa,
-                Role = wszystkieRole.ToDictionary(x => x, role.Contains)
+                NazwaWyświetlana = użytkownik.Login,
+                Role = wszystkieRole.Select(x => new RolaUzytkownika
+                {
+                    CzyMaRole = role.Contains(x),
+                    Nazwa = x,
+                    CzyMoznaEdytowac = CzyMoznaEdytowac(role, x)
+                }).ToList()
             });
+        }
+
+        private bool CzyMoznaEdytowac(string[] role, string x)
+        {
+            return !role.Contains(x) || !RoleWbudowane.Contains(x);
         }
 
         [HttpPost]
         public ActionResult EdytujRole(NoweRole model)
         {
-            var noweRole = model.Role.Where(x => x.Value).Select(x => x.Key).ToArray();
-            var stareRole = Roles.GetRolesForUser(User.Identity.Name);
+            var roleModel = model.Role ?? new Dictionary<string, bool>();
+            var noweRole = roleModel.Where(x => x.Value).Select(x => x.Key).ToArray();
+            var stareRole = Roles.GetRolesForUser(model.Login);
             var wszystkieRole = Roles.GetAllRoles();
 
-            var roleDoUsuniecia = stareRole.Except(noweRole).ToArray();
+            var roleDoUsuniecia = stareRole.Except(noweRole).Except(RoleWbudowane).ToArray();
             var roleDoDodania = noweRole.Except(stareRole).ToArray();
 
             if (roleDoUsuniecia.Any())
@@ -52,10 +64,16 @@ namespace projektInz.web.Controllers
                 Roles.AddUsersToRoles(new[] { model.Login }, roleDoDodania);
             }
 
+            var role = Roles.GetRolesForUser(model.Login);
             return View(new WidokRólUżytkownika()
             {
                 NazwaWyświetlana = model.Login,
-                Role = wszystkieRole.ToDictionary(x => x, noweRole.Contains)
+                Role = wszystkieRole.Select(x => new RolaUzytkownika
+                {
+                    CzyMaRole = role.Contains(x),
+                    Nazwa = x,
+                    CzyMoznaEdytowac = CzyMoznaEdytowac(role, x)
+                }).ToList()
             });
         }
 
