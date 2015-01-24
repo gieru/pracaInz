@@ -22,6 +22,8 @@ namespace projektInz.dane
         public DbSet<Użytkownik> Użytkownicy { get; set; }
         public DbSet<Kontrahent> Kontrahenci { get; set; } 
         public DbSet<Produkt> Produkty { get; set; } 
+        public DbSet<Zamowienie> Zamowienia { get; set; } 
+        public DbSet<Pozycja> Pozycje { get; set; } 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -60,6 +62,12 @@ namespace projektInz.dane
             produkty.Property(x => x.CenaZakupu).IsRequired();
             produkty.Property(x => x.CenaSprzedazy).IsRequired();
             produkty.ToTable("Produkty");
+
+            var zamowienia = modelBuilder.Entity<Zamowienie>();
+            zamowienia.HasKey(x => x.Id);
+            zamowienia.HasMany(x => x.Pozycje).WithRequired().WillCascadeOnDelete();
+
+            modelBuilder.Entity<Pozycja>().HasRequired(p => p.Produkt).WithMany();
         }
     }
 }

@@ -40,9 +40,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Kontrahent.cs" />
+    <Compile Include="Pozycja.cs" />
     <Compile Include="Produkt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StanZamowienia.cs" />
     <Compile Include="Użytkownik.cs" />
+    <Compile Include="Zamowienie.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

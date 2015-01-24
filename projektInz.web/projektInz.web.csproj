@@ -170,6 +170,7 @@
     <Compile Include="Controllers\ProduktyController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UzytkownicyController.cs" />
+    <Compile Include="Controllers\ZamowieniaController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -180,6 +181,7 @@
     <Compile Include="Models\WidokProduktu.cs" />
     <Compile Include="Models\WidokRólUżytkownika.cs" />
     <Compile Include="Models\WidokUżytkownika.cs" />
+    <Compile Include="Models\WidokZamowienia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -309,6 +311,8 @@
     <Content Include="Views\Kontrahenci\EdytujKontrahent.cshtml" />
     <Content Include="Views\Uzytkownicy\Index.cshtml" />
     <Content Include="Views\Uzytkownicy\Dodaj.cshtml" />
+    <Content Include="Views\Zamowienia\Index.cshtml" />
+    <Content Include="Views\Zamowienia\EdytujZamowienie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\projektInz.biznes\projektInz.biznes.csproj">
@@ -325,6 +329,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Faktury\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -25,8 +25,11 @@ namespace projektInz.web.Controllers
             {
                 Id = produkt.Id,
                 Nazwa = produkt.Nazwa,
-                DataWprowadzenia = produkt.DataWprowadzenia.ToShortDateString()
-
+                DataWprowadzenia = produkt.DataWprowadzenia.ToShortDateString(),
+                CenaSprzedazy = produkt.CenaSprzedazy,
+                CenaZakupu = produkt.CenaZakupu,
+                Grupa = produkt.Grupa,
+                Stan = produkt.Stan
             }).ToList();
             //Wyrenderuj widok na bazie modelu widoki
             return View(widoki);
@@ -63,9 +66,9 @@ namespace projektInz.web.Controllers
                 var produkt = dane.Produkty.Single(x => x.Id == edytowanyProdukt.Id);
                 produkt.ZmienProdukt(edytowanyProdukt.Nazwa,
                     edytowanyProdukt.Grupa, 
-                    edytowanyProdukt.CenaSprzedazy, 
+                    edytowanyProdukt.Stan, 
                     edytowanyProdukt.CenaZakupu, 
-                    edytowanyProdukt.Stan);
+                    edytowanyProdukt.CenaSprzedazy);
 
                 //Wysyła zmiany do bazy
                 dane.SaveChanges();
@@ -90,9 +93,9 @@ namespace projektInz.web.Controllers
             { 
                 var produkt = new Produkt(nowyProdukt.Nazwa,
                     nowyProdukt.Grupa,
-                    nowyProdukt.CenaSprzedazy,
+                    nowyProdukt.Stan,
                     nowyProdukt.CenaZakupu,
-                    nowyProdukt.Stan);
+                    nowyProdukt.CenaSprzedazy);
                 //Dodaje nowy produkt do unit of work, ale jeszcze nie do bazy danych
                 dane.Produkty.Add(produkt);
                 //Wysyła zmiany do bazy

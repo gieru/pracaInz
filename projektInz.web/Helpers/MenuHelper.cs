@@ -18,6 +18,7 @@ namespace projektInz.web.Helpers
             typeof(ProduktyController),
             typeof(KontrahenciController),
             typeof(UzytkownicyController),
+            typeof(ZamowieniaController),
         };
 
    
