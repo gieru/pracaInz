@@ -23,8 +23,14 @@ namespace projektInz.dane
         public DbSet<Użytkownik> Użytkownicy { get; set; }
         public DbSet<Kontrahent> Kontrahenci { get; set; } 
         public DbSet<Produkt> Produkty { get; set; } 
+
         public DbSet<Zamowienie> Zamowienia { get; set; } 
-        public DbSet<Pozycja> Pozycje { get; set; } 
+        public DbSet<PozycjaZamowienia> PozycjeZamowien { get; set; } 
+
+        public DbSet<Faktura> Faktury { get; set; }
+        public DbSet<PozycjaFaktury> PozycjeFaktur { get; set; }
+
+        public DbSet<GeneratorNumerowFaktur> GeneratoryNumerowFaktur { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -69,9 +75,18 @@ namespace projektInz.dane
             zamowienia.HasKey(x => x.Id);
             zamowienia.HasMany(x => x.Pozycje);
 
-            var pozycje = modelBuilder.Entity<Pozycja>();
-            pozycje.HasRequired(p => p.Produkt).WithMany();
-            pozycje.ToTable("PozycjeZamowienia");
+            var pozycjeZamowien = modelBuilder.Entity<PozycjaZamowienia>();
+            pozycjeZamowien.HasRequired(p => p.Produkt).WithMany();
+            pozycjeZamowien.ToTable("PozycjeZamowienia");
+
+            var faktury = modelBuilder.Entity<Faktura>();
+            faktury.ToTable("Faktury");
+            faktury.HasKey(x => x.Id);
+            faktury.HasMany(x => x.Pozycje);
+
+            var pozycjeFaktur = modelBuilder.Entity<PozycjaFaktury>();
+            pozycjeFaktur.HasRequired(p => p.Produkt).WithMany();
+            pozycjeFaktur.ToTable("PozycjeFaktury");
         }
     }
 }

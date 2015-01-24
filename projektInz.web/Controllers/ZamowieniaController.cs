@@ -31,6 +31,7 @@ namespace projektInz.web.Controllers
             return new WidokZamowienia()
             {
                 Id = zamowienie.Id,
+                Stan = zamowienie.Stan.ToString(),
                 Numer = zamowienie.Id.ToString(),
                 IloscPozycji = zamowienie.Pozycje.Count,
                 Wartosc = zamowienie.Wartosc
@@ -99,13 +100,17 @@ namespace projektInz.web.Controllers
             using (var dane = new KontekstDanych())
             {
                 var zamowienie = dane.Zamowienia.First(x => x.Id == nowaPozycja.Id);
+                var produkt = dane.Produkty.First(x => x.Id == nowaPozycja.IdProduktu);
 
                 if (!ModelState.IsValid)
                 {
                     return View("EdytujZamowienie", UtworzEdytowaneZamowienie(zamowienie, dane.Produkty));
                 }
-
-                var produkt = dane.Produkty.First(x => x.Id == nowaPozycja.IdProduktu);
+                if (!zamowienie.MoznaDodacPozycje(produkt, nowaPozycja.Ilosc))
+                {
+                    ModelState.AddModelError("Ilosc", "Brak wymaganej ilości towaru na magazynie. Dostępne "+produkt.Stan);
+                    return View("EdytujZamowienie", UtworzEdytowaneZamowienie(zamowienie, dane.Produkty));
+                }
                 zamowienie.DodajPozycje(produkt, nowaPozycja.Ilosc);
 
                 dane.SaveChanges();
@@ -132,7 +137,12 @@ namespace projektInz.web.Controllers
                     ModelState.AddModelError("Ilosc[" + zaktualizowanaPozycja.Numer + "]", "Ilość musi być poprawną liczbą.");
                     return View("EdytujZamowienie", UtworzEdytowaneZamowienie(zamowienie, dane.Produkty));
                 }
-
+                if (!zamowienie.MoznaAktualizowacPozycje(zaktualizowanaPozycja.Numer, ilosc))
+                {
+                    var pozycja = zamowienie.Pozycje.First(x => x.Numer == zaktualizowanaPozycja.Numer);
+                    ModelState.AddModelError("Ilosc[" + zaktualizowanaPozycja.Numer + "]", "Brak wymaganej ilości towaru na magazynie. Dostępne " + pozycja.Produkt.Stan);
+                    return View("EdytujZamowienie", UtworzEdytowaneZamowienie(zamowienie, dane.Produkty));
+                }
                 zamowienie.AktualizujPozycje(zaktualizowanaPozycja.Numer, ilosc);
 
                 dane.SaveChanges();
@@ -152,7 +162,7 @@ namespace projektInz.web.Controllers
                     return View("EdytujZamowienie", UtworzEdytowaneZamowienie(zamowienie, dane.Produkty));
                 }
                 var usunieta = zamowienie.UsunPozycje(usunietaPozycja.Numer);
-                dane.Pozycje.Remove(usunieta);
+                dane.PozycjeZamowien.Remove(usunieta);
                 dane.SaveChanges();
                 return RedirectToAction("EdytujZamowienie", new { id = zamowienie.Id });
             }
@@ -165,7 +175,9 @@ namespace projektInz.web.Controllers
             using (var dane = new KontekstDanych())
             {
                 var zamowienie = dane.Zamowienia.First(x => x.Id == id);
-                zamowienie.Zatwierdz();
+                var generator = dane.GeneratoryNumerowFaktur.First();
+                var faktura = zamowienie.Zatwierdz(generator);
+                dane.Faktury.Add(faktura);
                 dane.SaveChanges();
                 return RedirectToAction("Index");
             }

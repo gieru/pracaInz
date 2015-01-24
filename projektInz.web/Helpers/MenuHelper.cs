@@ -8,6 +8,7 @@ using System.Web.Mvc.Html;
 using System.Web.Security;
 using System.Web.UI.WebControls;
 using projektInz.web.Controllers;
+using WebMatrix.WebData;
 
 namespace projektInz.web.Helpers
 {
@@ -43,12 +44,17 @@ namespace projektInz.web.Helpers
                             .Select(x => x.Trim(' '))
                             .ToArray();
                     //Jesli ktorakolwiek (Any) rola jest przypisana zalogowanemu uzytkownikowi to generujemy link
-                    if (role.Any(Roles.IsUserInRole))
+                    if (role.Any(IsUserInRole))
                     {
                         yield return helper.ActionLink(linkName, "Index", linkName);
                     }
                 }
             }
-        } 
+        }
+
+        private static bool IsUserInRole(string x)
+        {
+            return WebSecurity.UserExists(WebSecurity.CurrentUserName) && Roles.IsUserInRole(x);
+        }
     }
 }

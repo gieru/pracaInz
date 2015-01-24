@@ -39,8 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Faktura.cs" />
+    <Compile Include="GeneratorNumerowFaktur.cs" />
     <Compile Include="Kontrahent.cs" />
-    <Compile Include="Pozycja.cs" />
+    <Compile Include="PozycjaFaktury.cs" />
+    <Compile Include="PozycjaZamowienia.cs" />
     <Compile Include="Produkt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StanZamowienia.cs" />

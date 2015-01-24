@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace projektInz.biznes
 {
-    public class Zamowienie
+    public partial class Zamowienie
     {
         public int Id { get; set; }
         public StanZamowienia Stan { get; set; }
-        public virtual ICollection<Pozycja> Pozycje { get; set; }
+        public virtual ICollection<PozycjaZamowienia> Pozycje { get; set; }
 
         public decimal Wartosc
         {
@@ -18,14 +18,25 @@ namespace projektInz.biznes
         public int DodajPozycje(Produkt produkt, int ilosc)
         {
             var numerNowejPozycji = NumerNowejPozycji();
-            var pozycja = new Pozycja(this, numerNowejPozycji, produkt, ilosc);
+            var pozycja = new PozycjaZamowienia(this, numerNowejPozycji, produkt, ilosc);
             Pozycje.Add(pozycja);
             return numerNowejPozycji;
+        }
+
+        public bool MoznaDodacPozycje(Produkt produkt, int ilosc)
+        {
+            return produkt.Stan - ilosc >= 0;
         }
 
         private int NumerNowejPozycji()
         {
             return Pozycje.Count + 1;
+        }
+
+        public bool MoznaAktualizowacPozycje(int numer, int nowaIlosc)
+        {
+            var pozycja = Pozycje.First(x => x.Numer == numer);
+            return pozycja.MoznaAktualizowac(nowaIlosc);
         }
 
         public void AktualizujPozycje(int numer, int nowaIlosc)
@@ -34,10 +45,11 @@ namespace projektInz.biznes
             pozycja.Aktulizuj(nowaIlosc);
         }
 
-        public Pozycja UsunPozycje(int numer)
+        public PozycjaZamowienia UsunPozycje(int numer)
         {
             var usunietaPozycja = Pozycje.First(x => x.Numer == numer);
             Pozycje.Remove(usunietaPozycja);
+            usunietaPozycja.ZwolnijBlokadeTowaru();
             return usunietaPozycja;
         }
 
@@ -45,6 +57,10 @@ namespace projektInz.biznes
         {
             SprawdzStan(MoznaAnulowac);
             Stan = StanZamowienia.Anulowane;
+            foreach (var pozycja in Pozycje)
+            {
+                pozycja.ZwolnijBlokadeTowaru();
+            }
         }
 
         public bool MoznaAnulowac
@@ -52,10 +68,11 @@ namespace projektInz.biznes
             get { return Stan == StanZamowienia.Nowe; }
         }
 
-        public void Zatwierdz()
+        public Faktura Zatwierdz(GeneratorNumerowFaktur generatorNumerowFaktur)
         {
             SprawdzStan(MoznaZatwierdzic);
             Stan = StanZamowienia.DoZaplacenia;
+            return new Faktura(this, generatorNumerowFaktur.GenerujNumer(DateTime.Now));
         }
 
         public bool MoznaZatwierdzic
@@ -100,7 +117,7 @@ namespace projektInz.biznes
 
         public Zamowienie()
         {
-            Pozycje = new List<Pozycja>();
+            Pozycje = new List<PozycjaZamowienia>();
         }
     }
 }

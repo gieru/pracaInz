@@ -1,6 +1,6 @@
+using System;
 using System.Data.Entity;
 using System.Linq;
-using System.Web.Security;
 using projektInz.biznes;
 
 namespace projektInz.dane
@@ -22,6 +22,14 @@ namespace projektInz.dane
                 };
                 context.U¿ytkownicy.Add(admin);
             }
+
+            var generatorNumerowFaktur = context.GeneratoryNumerowFaktur.FirstOrDefault();
+            if (generatorNumerowFaktur == null)
+            {
+                generatorNumerowFaktur = new GeneratorNumerowFaktur(DateTime.Now);
+                context.GeneratoryNumerowFaktur.Add(generatorNumerowFaktur);
+            }
+
             context.SaveChanges();
         }
     }
