@@ -3,8 +3,9 @@
     public enum StanZamowienia
     {
         Nowe,
-        WTrakcieRealizacji,
+        DoZaplacenia,
         Oplacone,
+        Zrealizowano,
         Anulowane,
     }
 }

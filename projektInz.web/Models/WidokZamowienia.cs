@@ -18,6 +18,14 @@ namespace projektInz.web.Models
 
     public class EdytowaneZamowienie
     {
+        public string Stan { get; set; }
+
+        public bool MoznaEdytowac { get; set; }
+        public bool MoznaAnulowac { get; set; }
+        public bool MoznaZatwierdzic { get; set; }
+        public bool MoznaOplacic { get; set; }
+        public bool MoznaZrealizowac { get; set; }
+
         public List<SelectListItem> Produkty { get; set; }
         public int Id { get; set; }
         public string Numer { get; set; }

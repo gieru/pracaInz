@@ -36,10 +36,16 @@ namespace projektInz.web.Controllers
                 Wartosc = zamowienie.Wartosc
             };
         }
-        private static EdytowaneZamowienie UtworzEdytowaneZamowienie(Zamowienie zamowienie, IEnumerable<Produkt> produkty)
+        private EdytowaneZamowienie UtworzEdytowaneZamowienie(Zamowienie zamowienie, IEnumerable<Produkt> produkty)
         {
             return new EdytowaneZamowienie
             {
+                Stan = zamowienie.Stan.ToString(),
+                MoznaAnulowac = zamowienie.MoznaAnulowac && User.IsInRole("sprzedawca"),
+                MoznaEdytowac = zamowienie.MoznaEdytowac && User.IsInRole("sprzedawca"),
+                MoznaOplacic = zamowienie.MoznaOplacic && User.IsInRole("kasjer"),
+                MoznaZatwierdzic = zamowienie.MoznaZatwierdzic && User.IsInRole("sprzedawca"),
+                MoznaZrealizowac = zamowienie.MoznaZrealizowac && User.IsInRole("magazynier"),
                 Produkty = produkty.Select(x => new SelectListItem()
                 {
                     Text = x.Nazwa,
@@ -58,6 +64,7 @@ namespace projektInz.web.Controllers
             };
         }
 
+        [Authorize(Roles = "sprzedawca")]
         public ActionResult DodajZamowienie()
         {
             Zamowienie zamowienie;
@@ -71,6 +78,7 @@ namespace projektInz.web.Controllers
             return RedirectToAction("EdytujZamowienie", new { id = zamowienie.Id });
         }
 
+        [Authorize(Roles = "sprzedawca, kasjer, magazynier")]
         public ActionResult EdytujZamowienie(int id)
         {
             using (var dane = new KontekstDanych())
@@ -82,13 +90,9 @@ namespace projektInz.web.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult Anuluj(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         [HttpPost]
+        [Authorize(Roles = "sprzedawca")]
         public ActionResult DodajPozycje(NowaPozycja nowaPozycja)
         {
 
@@ -109,9 +113,11 @@ namespace projektInz.web.Controllers
             }
         }
 
+        [HttpPost]
+        [Authorize(Roles = "sprzedawca")]
         public ActionResult AktualizujPozycje(ZaktualizowanaPozycja zaktualizowanaPozycja)
         {
-            
+
             using (var dane = new KontekstDanych())
             {
                 var zamowienie = dane.Zamowienia.First(x => x.Id == zaktualizowanaPozycja.Id);
@@ -123,7 +129,7 @@ namespace projektInz.web.Controllers
                 int ilosc;
                 if (!int.TryParse(zaktualizowanaPozycja.Ilosc[zaktualizowanaPozycja.Numer.ToString()], out ilosc))
                 {
-                    ModelState.AddModelError("Ilosc["+zaktualizowanaPozycja.Numer+"]", "Ilość musi być poprawną liczbą.");
+                    ModelState.AddModelError("Ilosc[" + zaktualizowanaPozycja.Numer + "]", "Ilość musi być poprawną liczbą.");
                     return View("EdytujZamowienie", UtworzEdytowaneZamowienie(zamowienie, dane.Produkty));
                 }
 
@@ -134,6 +140,8 @@ namespace projektInz.web.Controllers
             }
         }
 
+        [HttpPost]
+        [Authorize(Roles = "sprzedawca")]
         public ActionResult UsunPozycje(UsunietaPozycja usunietaPozycja)
         {
             using (var dane = new KontekstDanych())
@@ -147,6 +155,59 @@ namespace projektInz.web.Controllers
                 dane.Pozycje.Remove(usunieta);
                 dane.SaveChanges();
                 return RedirectToAction("EdytujZamowienie", new { id = zamowienie.Id });
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "sprzedawca")]
+        public ActionResult Zatwierdz(int id)
+        {
+            using (var dane = new KontekstDanych())
+            {
+                var zamowienie = dane.Zamowienia.First(x => x.Id == id);
+                zamowienie.Zatwierdz();
+                dane.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "kasjer")]
+        public ActionResult Oplacono(int id)
+        {
+            using (var dane = new KontekstDanych())
+            {
+                var zamowienie = dane.Zamowienia.First(x => x.Id == id);
+                zamowienie.Oplacono();
+                dane.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "magazynier")]
+        public ActionResult Zrealizowano(int id)
+        {
+            using (var dane = new KontekstDanych())
+            {
+                var zamowienie = dane.Zamowienia.First(x => x.Id == id);
+                zamowienie.Zrealizowano();
+                dane.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "sprzedawca")]
+        public ActionResult Anuluj(int id)
+        {
+            using (var dane = new KontekstDanych())
+            {
+                //Pobranie
+                var zamowienie = dane.Zamowienia.First(x => x.Id == id);
+                zamowienie.Anuluj();
+                dane.SaveChanges();
+                return RedirectToAction("Index");
             }
         }
     }

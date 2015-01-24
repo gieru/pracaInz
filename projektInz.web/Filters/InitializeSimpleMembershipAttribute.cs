@@ -33,7 +33,7 @@ namespace projektInz.web.Filters
                     new KontekstDanych().Database.Initialize(true);
                     WebSecurity.InitializeDatabaseConnection("DefaultConnection", "Uzytkownicy", "Id", "Login", autoCreateTables: true);
 
-                    var roleDomyslne = new[] {"admin","sprzedawca","magazynier"};
+                    var roleDomyslne = new[] {"admin","sprzedawca","magazynier","kasjer"};
                     var roleIstniejace = Roles.GetAllRoles();
 
                     foreach (var brakujacaRola in roleDomyslne.Except(roleIstniejace))

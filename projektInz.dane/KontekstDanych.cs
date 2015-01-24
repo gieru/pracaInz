@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration;
+using System.Web.UI;
 using projektInz.biznes;
 using System;
 using System.Collections.Generic;
@@ -64,10 +65,13 @@ namespace projektInz.dane
             produkty.ToTable("Produkty");
 
             var zamowienia = modelBuilder.Entity<Zamowienie>();
+            zamowienia.ToTable("Zamowienia");
             zamowienia.HasKey(x => x.Id);
-            zamowienia.HasMany(x => x.Pozycje).WithRequired().WillCascadeOnDelete();
+            zamowienia.HasMany(x => x.Pozycje);
 
-            modelBuilder.Entity<Pozycja>().HasRequired(p => p.Produkt).WithMany();
+            var pozycje = modelBuilder.Entity<Pozycja>();
+            pozycje.HasRequired(p => p.Produkt).WithMany();
+            pozycje.ToTable("PozycjeZamowienia");
         }
     }
 }
