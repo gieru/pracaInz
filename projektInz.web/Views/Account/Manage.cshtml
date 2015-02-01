@@ -7,10 +7,10 @@
     <h1>@ViewBag.Title</h1>
 </hgroup>
 <h3>Twoje role</h3>
-<span class="label label-primary">
+<span>
     @foreach (var rola in Model.Role)
     {
-        @rola
+        @rola <br/>
     }
 </span>
 <br/>

@@ -21,6 +21,7 @@ namespace projektInz.dane
         }
 
         public DbSet<Użytkownik> Użytkownicy { get; set; }
+       // public DbSet<Użytkownik> Klienci { get; set; }
         public DbSet<Kontrahent> Kontrahenci { get; set; } 
         public DbSet<Produkt> Produkty { get; set; } 
 
@@ -60,6 +61,19 @@ namespace projektInz.dane
             kontrahenci.Property(x => x.NrTel).HasMaxLength(20).IsRequired();
             kontrahenci.Property(x => x.Email).HasMaxLength(70).IsRequired();
             kontrahenci.ToTable("Kontrahenci");
+
+          /*  var klienci = modelBuilder.Entity<Klienci>();
+            klienci.HasKey(x => x.Id);
+            klienci.HasKey(x => x.Imie);
+            klienci.HasKey(x => x.Nazwisko);
+            klienci.HasKey(x => x.PESEL);
+            klienci.HasKey(x => x.Nip);
+            klienci.HasKey(x => x.NazwaFirmy);
+            klienci.HasKey(x => x.Adres);
+            klienci.HasKey(x => x.NrTel);
+            klienci.HasKey(x => x.Email);
+            klienci.ToTable("Klienci"); */
+
 
             var produkty = modelBuilder.Entity<Produkt>();
             produkty.HasKey(x => x.Id);

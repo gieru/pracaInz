@@ -6,6 +6,7 @@ namespace projektInz.web.Models
     public class WidokZamowienia
     {
         public int Id { get; set; }
+        public string Stan { get; set; }
         public string Numer { get; set; }
         public int IloscPozycji { get; set; }
         public decimal Wartosc { get; set; }
