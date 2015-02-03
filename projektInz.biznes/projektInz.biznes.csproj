@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Customers.cs" />
+    <Compile Include="Klienci.cs" />
     <Compile Include="Faktura.cs" />
     <Compile Include="GeneratorNumerowFaktur.cs" />
     <Compile Include="Kontrahent.cs" />

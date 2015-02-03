@@ -25,18 +25,18 @@
             @foreach (var klient in this.Model)
             {
                 <tr>
-                    <td>@klient.Imię</td>
+                    <td>@klient.Imie</td>
                     <td>@klient.Nazwisko</td>
                     <td>@klient.NazwaFirmy</td>
                     <td>@klient.Adres</td>
                     <td>@klient.Nip</td>
                     <td>@klient.NrTel</td>
                     <td>@klient.Email</td>
-                    <td>@Html.ActionLink("Edytuj", "EdytujKontrahent", new { id = klient.Id })</td>
+                    <td>@Html.ActionLink("Edytuj", "EdytujKlienta", new { id = klient.Id })</td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-@Html.ActionLink("Dodaj","DodajKontrahenta")
+@Html.ActionLink("Dodaj","DodajKlienta")
     

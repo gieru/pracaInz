@@ -21,7 +21,7 @@ namespace projektInz.dane
         }
 
         public DbSet<Użytkownik> Użytkownicy { get; set; }
-        //public DbSet<Customers> Customers { get; set; }
+        public DbSet<Klienci> Klienci { get; set; }
         public DbSet<Kontrahent> Kontrahenci { get; set; } 
         public DbSet<Produkt> Produkty { get; set; } 
 
@@ -62,16 +62,16 @@ namespace projektInz.dane
             kontrahenci.Property(x => x.Email).HasMaxLength(70).IsRequired();
             kontrahenci.ToTable("Kontrahenci");
 
-            var klienci = modelBuilder.Entity<Customers>();
+            var klienci = modelBuilder.Entity<Klienci>();
             klienci.HasKey(x => x.id);
-            klienci.HasKey(x => x.Imie);
-            klienci.HasKey(x => x.Nazwisko);
-            klienci.HasKey(x => x.pesel);
-            klienci.HasKey(x => x.Nip);
-            klienci.HasKey(x => x.NazwaFirmy);
-            klienci.HasKey(x => x.Adres);
-            klienci.HasKey(x => x.NrTel);
-            klienci.HasKey(x => x.Email);
+            klienci.Property(x => x.Imie).HasMaxLength(50).IsRequired();
+            klienci.Property(x => x.Nazwisko).HasMaxLength(75).IsRequired();
+            klienci.Property(x => x.Pesel).IsRequired();
+            klienci.Property(x => x.Nip);
+            klienci.Property(x => x.NazwaFirmy);
+            klienci.Property(x => x.Adres).IsRequired();
+            klienci.Property(x => x.NrTel).IsRequired();
+            klienci.Property(x => x.Email);
             klienci.ToTable("Klienci");
 
 
