@@ -24,15 +24,12 @@ namespace projektInz.web.Models
         [Required]
         public string Nazwisko { get; set; }
         [Required]
-        [Description("Nazwa Firmy")]
         public string NazwaFirmy { get; set; }
         [Required]
-        [Description("NIP")]
         public string Nip { get; set; }
         [Required]
         public string Adres { get; set; }
         [Required]
-        [Description("Numer Telefonu")]
         public string NrTel { get; set; }
         public string Email { get; set; }
     }
@@ -43,10 +40,15 @@ namespace projektInz.web.Models
         [MinLength(3)]
         [Required]
         public string Imię { get; set; }
+        [Required]
         public string Nazwisko { get; set; }
+        [Required]
         public string NazwaFirmy { get; set; }
+        [Required]
         public string Nip { get; set; }
+        [Required]
         public string Adres { get; set; }
+        [Required]
         public string NrTel { get; set; }
         public string Email { get; set; }
 

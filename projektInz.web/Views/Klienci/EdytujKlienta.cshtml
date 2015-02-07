@@ -7,7 +7,7 @@
 
 <h2>Edytuj Klienta</h2>
 
-@using (Html.BeginForm(("EdytujKlienta", "Klienci", FormMethod.Post, new {role = "form"})))
+@using (Html.BeginForm("EdytujKlienta", "Klienci", FormMethod.Post, new {role = "form"}))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
@@ -26,11 +26,11 @@
         @Html.TextBoxFor(m => m.Pesel,new { @class = "form-control", placeholder = "Wprowadź PESEL" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.NazwaFirmy)
+        @Html.LabelFor(m => m.NazwaFirmy, "Nazwa Firmy")
         @Html.TextBoxFor(m => m.NazwaFirmy,new { @class = "form-control", placeholder = "Wprowadź nazwę" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Nip)
+        @Html.LabelFor(m => m.Nip, "NIP")
         @Html.TextBoxFor(m => m.Nip,new { @class = "form-control", placeholder = "Wprowadź nazwę" })
     </div>
     <div class="form-group">
@@ -38,7 +38,7 @@
         @Html.TextBoxFor(m => m.Adres,new { @class = "form-control", placeholder = "Wprowadź nazwę" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.NrTel)
+        @Html.LabelFor(m => m.NrTel, "Numer Telefonu")
         @Html.TextBoxFor(m => m.NrTel,new { @class = "form-control", placeholder = "Wprowadź nazwę" })
     </div>
     <div class="form-group">

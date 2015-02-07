@@ -19,27 +19,27 @@
         public Klienci(string imie, string nazwisko, string PESEL, string firma, string nip, string adres,
             string tel, string email)
         {
-            imie = Imie;
-            nazwisko = Nazwisko;
+            Imie = imie;
+            Nazwisko = nazwisko;
             Pesel = PESEL;
-            firma = NazwaFirmy;
-            nip = Nip;
-            adres = Adres;
-            tel = NrTel;
-            email = Email;
+            NazwaFirmy = firma;
+            Nip = nip;
+            Adres = adres;
+            NrTel = tel;
+            Email = email;
         }
         //Edycja
         public void ZmienKlienta(string imie, string nazwisko, string PESEL, string firma, string nip, string adres,
             string tel, string email)
         {
-            imie = Imie;
-            nazwisko = Nazwisko;
+            Imie = imie;
+            Nazwisko = nazwisko;
             Pesel = PESEL;
-            firma = NazwaFirmy;
-            nip = Nip;
-            adres = Adres;
-            tel = NrTel;
-            email = Email;
+            NazwaFirmy = firma;
+            Nip = nip;
+            Adres = adres;
+            NrTel = tel;
+            Email = email;
         }
     }
 }
