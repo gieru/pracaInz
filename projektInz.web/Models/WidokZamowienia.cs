@@ -9,7 +9,8 @@ namespace projektInz.web.Models
         public string Stan { get; set; }
         public string Numer { get; set; }
         public int IloscPozycji { get; set; }
-        public decimal Wartosc { get; set; }
+        public decimal WartoscNetto { get; set; }
+        public decimal WartoscBrutto { get; set; }
     }
 
     public class NoweZamowienie
@@ -38,8 +39,10 @@ namespace projektInz.web.Models
         public int Numer { get; set; }
         public decimal Ilosc { get; set; }
         public string Produkt { get; set; }
-        public decimal CenaJednostkowa { get; set; }
-        public decimal Cena { get; set; }
+        public decimal CenaJednostkowaNetto { get; set; }
+        public int StawkaVat { get; set; }
+        public decimal CenaBrutto { get; set; }
+        public decimal CenaNetto { get; set; }
     }
 
     public class NowaPozycja

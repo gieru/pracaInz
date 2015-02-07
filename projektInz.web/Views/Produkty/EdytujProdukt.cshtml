@@ -29,16 +29,20 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Stan)
         @Html.TextBoxFor(m => m.Stan,new { @class = "form-control", placeholder = "Wprowadź stan" }) 
+    </div>    
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.StawkaVat, "Stawka VAT w %")
+        @Html.TextBoxFor(m => m.StawkaVat,new { @class = "form-control", placeholder = "Wprowadź stawkę VAT" }) 
     </div>
     
     <div class="form-group">
-        @Html.LabelFor(m => m.CenaZakupu)
-        @Html.TextBoxFor(m => m.CenaZakupu,new { @class = "form-control", placeholder = "Wprowadź cene zakupu towaru" })
+        @Html.LabelFor(m => m.CenaZakupuNetto, "Cena Zakupu")
+        @Html.TextBoxFor(m => m.CenaZakupuNetto,new { @class = "form-control", placeholder = "Wprowadź cene zakupu towaru netto" })
+    </div>   
+      <div class="form-group">
+        @Html.LabelFor(m => m.Marza, "Marża w %")
+        @Html.TextBoxFor(m => m.Marza,new { @class = "form-control", placeholder = "Wprowadź marżę" })
     </div> 
-    
-    <div class="form-group">
-        @Html.LabelFor(m => m.CenaSprzedazy)
-        @Html.TextBoxFor(m => m.CenaSprzedazy,new { @class = "form-control", placeholder = "Wprowadź cene sprzedaży towaru" }) 
-    </div>
     <input type="submit" class="btn btn-info btn-circle btn-xl" value="+" />
 }

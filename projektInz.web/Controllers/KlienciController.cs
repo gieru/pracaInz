@@ -8,6 +8,7 @@ using projektInz.web.Models;
 
 namespace projektInz.web.Controllers
 {
+    [Authorize(Roles = "admin, sprzedawca, kasjer")]
     public class KlienciController : Controller
     {
         //

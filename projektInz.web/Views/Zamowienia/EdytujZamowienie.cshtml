@@ -51,8 +51,9 @@
                     <tr>
                         <th>Produkt</th>
                         <th>Ilość</th>
-                        <th>Cena jednostkowa</th>
-                        <th>Cena</th>
+                        <th>Cena jednostkowa netto</th>
+                        <th>Cena netto</th>
+                        <th>Cena brutto</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -78,8 +79,9 @@
                                     <span>@pozycja.Ilosc</span>
                                 }
                             </td>
-                            <td>@pozycja.CenaJednostkowa</td>
-                            <td>@pozycja.Cena</td>
+                            <td>@pozycja.CenaJednostkowaNetto.ToString("#.00")</td>
+                            <td>@pozycja.CenaNetto.ToString("#.00")</td>
+                            <td>@pozycja.CenaBrutto.ToString("#.00")</td>
                             <td>
                                 @if (Model.MoznaEdytowac)
                                 {

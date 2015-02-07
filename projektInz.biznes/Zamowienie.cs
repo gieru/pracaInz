@@ -10,9 +10,14 @@ namespace projektInz.biznes
         public StanZamowienia Stan { get; set; }
         public virtual ICollection<PozycjaZamowienia> Pozycje { get; set; }
 
-        public decimal Wartosc
+        public decimal WartoscBrutto
         {
-            get { return Pozycje.Sum(x => x.Cena); }
+            get { return Pozycje.Sum(x => x.CenaBrutto); }
+        }
+        
+        public decimal WartoscNetto
+        {
+            get { return Pozycje.Sum(x => x.CenaNetto); }
         }
 
         public int DodajPozycje(Produkt produkt, int ilosc)

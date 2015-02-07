@@ -21,14 +21,18 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Stan)
         @Html.TextBoxFor(m => m.Stan, new { @class = "form-control", placeholder = "Wprowadz stan" })
+    </div>    
+    <div class="form-group">
+        @Html.LabelFor(m => m.StawkaVat, "Stawka VAT w %")
+        @Html.TextBoxFor(m => m.StawkaVat, new { @class = "form-control", placeholder = "Wprowadz stawkę VAT" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.CenaZakupu)
-        @Html.TextBoxFor(m => m.CenaZakupu, new { @class = "form-control", placeholder = "Podaj cene zakupu towaru" })
-    </div>
+        @Html.LabelFor(m => m.CenaZakupuNetto, "Cena Zakupu Netto")
+        @Html.TextBoxFor(m => m.CenaZakupuNetto, new { @class = "form-control", placeholder = "Podaj cene zakupu towaru netto" })
+    </div>    
     <div class="form-group">
-        @Html.LabelFor(m => m.CenaSprzedazy)
-        @Html.TextBoxFor(m => m.CenaSprzedazy, new { @class = "form-control", placeholder = "Podaj cene sprzedaży" })
-    </div>   
+        @Html.LabelFor(m => m.Marza, "Marża w %")
+        @Html.TextBoxFor(m => m.Marza, new { @class = "form-control", placeholder = "Podaj marżę" })
+    </div>
     <input type="submit" class="btn btn-default" value="Dodaj" />
 }

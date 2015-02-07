@@ -21,18 +21,25 @@ namespace projektInz.web.Controllers
                 wszystkieProdukty = dane.Produkty.ToList();
             }
 
-            var widoki = wszystkieProdukty.Select(produkt => new WidokProduktu
+            var widoki = wszystkieProdukty.Select(KonwertujProdukt).ToList();
+            //Wyrenderuj widok na bazie modelu widoki
+            return View(widoki);
+        }
+
+        private WidokProduktu KonwertujProdukt(Produkt produkt)
+        {
+            return new WidokProduktu
             {
                 Id = produkt.Id,
                 Nazwa = produkt.Nazwa,
                 DataWprowadzenia = produkt.DataWprowadzenia.ToShortDateString(),
-                CenaSprzedazy = produkt.CenaSprzedazy,
-                CenaZakupu = produkt.CenaZakupu,
+                CenaSprzedazyNetto = produkt.CenaSprzedazyNetto,
+                CenaZakupuNetto = produkt.CenaZakupuNetto,
                 Grupa = produkt.Grupa,
-                Stan = produkt.Stan
-            }).ToList();
-            //Wyrenderuj widok na bazie modelu widoki
-            return View(widoki);
+                Stan = produkt.Stan,
+                StawkaVat = (int) (produkt.StawkaVat * 100),
+                Marza = (int)(produkt.Marza * 100)
+            };
         }
 
         public ActionResult EdytujProdukt(int id)
@@ -42,16 +49,7 @@ namespace projektInz.web.Controllers
             {
                 produkt = dane.Produkty.Single(x => x.Id == id);
             }
-            return View(new WidokProduktu
-            {
-                Nazwa = produkt.Nazwa,
-                Grupa = produkt.Grupa,
-                Stan = produkt.Stan,
-                CenaZakupu = produkt.CenaZakupu,
-                CenaSprzedazy = produkt.CenaSprzedazy,
-                Id = produkt.Id,
-                DataWprowadzenia = produkt.DataWprowadzenia.ToShortDateString()
-            });
+            return View(KonwertujProdukt(produkt));
         }
 
         [HttpPost]
@@ -67,8 +65,9 @@ namespace projektInz.web.Controllers
                 produkt.ZmienProdukt(edytowanyProdukt.Nazwa,
                     edytowanyProdukt.Grupa, 
                     edytowanyProdukt.Stan, 
-                    edytowanyProdukt.CenaZakupu, 
-                    edytowanyProdukt.CenaSprzedazy);
+                    (decimal)edytowanyProdukt.StawkaVat / 100, 
+                    edytowanyProdukt.CenaZakupuNetto,
+                    (decimal)edytowanyProdukt.Marza / 100);
 
                 //Wysyła zmiany do bazy
                 dane.SaveChanges();
@@ -90,12 +89,13 @@ namespace projektInz.web.Controllers
                 return View();
             }
             using (var dane = new KontekstDanych())
-            { 
+            {
                 var produkt = new Produkt(nowyProdukt.Nazwa,
                     nowyProdukt.Grupa,
                     nowyProdukt.Stan,
-                    nowyProdukt.CenaZakupu,
-                    nowyProdukt.CenaSprzedazy);
+                    (decimal)nowyProdukt.StawkaVat / 100,
+                    nowyProdukt.CenaZakupuNetto,
+                    (decimal)nowyProdukt.Marza / 100);
                 //Dodaje nowy produkt do unit of work, ale jeszcze nie do bazy danych
                 dane.Produkty.Add(produkt);
                 //Wysyła zmiany do bazy

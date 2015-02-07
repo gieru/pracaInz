@@ -1,24 +1,21 @@
 ﻿@model projektInz.web.Models.WidokUżytkownika
 @{
-    ViewBag.Title = "Zmiana hasła";
+    ViewBag.Title = "Panel zmiany hasła";
 }
 
 <hgroup class="title">
     <h1>@ViewBag.Title</h1>
 </hgroup>
+<p class="message-success">@ViewBag.StatusMessage</p>
+<p>Jesteś zalogowany jako: <strong class="label label-success">@User.Identity.Name</strong></p>
 <h3>Twoje role</h3>
 <span>
     @foreach (var rola in Model.Role)
     {
-        @rola <br/>
+        @rola <br/> 
     }
 </span>
 <br/>
-<!--
-    <p class="message-success">@ViewBag.StatusMessage</p>
-
-    <p>Jesteś zalogowany jako <strong class="label label-success">@User.Identity.Name</strong></p>
-    <br />-->
 <h3>Zmiana hasła</h3>
 @Html.Partial("_ChangePasswordPartial",Model.Hasło)
 

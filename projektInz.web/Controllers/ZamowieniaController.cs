@@ -9,6 +9,7 @@ using projektInz.web.Models;
 
 namespace projektInz.web.Controllers
 {
+    [Authorize(Roles = "admin, sprzedawca, kasjer")]
     public class ZamowieniaController : Controller
     {
         public ActionResult Index()
@@ -34,7 +35,8 @@ namespace projektInz.web.Controllers
                 Stan = zamowienie.Stan.ToString(),
                 Numer = zamowienie.Id.ToString(),
                 IloscPozycji = zamowienie.Pozycje.Count,
-                Wartosc = zamowienie.Wartosc
+                WartoscBrutto = zamowienie.WartoscBrutto,
+                WartoscNetto = zamowienie.WartoscNetto,
             };
         }
         private EdytowaneZamowienie UtworzEdytowaneZamowienie(Zamowienie zamowienie, IEnumerable<Produkt> produkty)
@@ -57,9 +59,11 @@ namespace projektInz.web.Controllers
                 Pozycje = zamowienie.Pozycje.Select(pozycja => new WidokPozycjiZamowienia()
                 {
                     Produkt = pozycja.Produkt.Nazwa,
-                    CenaJednostkowa = pozycja.Produkt.CenaSprzedazy,
+                    CenaJednostkowaNetto = pozycja.Produkt.CenaSprzedazyNetto,
                     Ilosc = pozycja.Ilosc,
-                    Cena = pozycja.Cena,
+                    CenaNetto = pozycja.CenaNetto,
+                    CenaBrutto = pozycja.CenaBrutto,
+                    StawkaVat = (int) (pozycja.Produkt.StawkaVat * 100),
                     Numer = pozycja.Numer
                 }).ToList()
             };

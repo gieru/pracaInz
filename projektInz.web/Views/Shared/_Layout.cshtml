@@ -1,96 +1,94 @@
 ﻿@using projektInz.web.Helpers
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Hurtownia</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/bootstrap")
-        @Scripts.Render("~/bundles/modernizr")
-    </head>
-    <body>
+<head>
+    <meta charset="utf-8" />
+    <title>Hurtownia</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
 
-        <div id="wrapper">
+    <div id="wrapper">
 
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Hurtownia", "Index", "Home",new {@class = "navbar-brand"})
-                </div>
-
-                <ul class="nav navbar-top-links navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="@Url.Action("Manage","Account")">
-                                    Zmień hasło
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#" id="logOffButton" >
-                                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                                    Wyloguj
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                @using (Html.BeginForm("LogOff", "Account",FormMethod.Post, new {id = "logOffForm"}))
-                {
-                    @Html.AntiForgeryToken()
-                }
-                <div class="navbar-default sidebar" role="navigation">
-                    <div class="sidebar-nav navbar-collapse">
-                        <ul class="nav" id="side-menu">
-                            <li class="sidebar-search">
-                                <div class="input-group custom-search-form">
-                                    <input type="text" class="form-control" placeholder="Search...">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button">
-                                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                        </button>
-                                    </span>
-                                </div>
-                                <!-- /input-group -->
-                            </li>
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            @foreach (var link in Html.Menu())
-                            {
-                                <li>@link</li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
-            <!-- Page Content -->
-            <div id="page-wrapper">
-                <div class="container-fluid">
-                @RenderBody()
-                </div>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Hurtownia", "Index", "Home", new { @class = "navbar-brand" })
             </div>
 
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="@Url.Action("Manage", "Account")">Zmień hasło
+                        </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#" id="logOffButton">
+                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                                Wyloguj
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logOffForm" }))
+            {
+                @Html.AntiForgeryToken()
+            }
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        @foreach (var link in Html.Menu())
+                        {
+                            <li>@link</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
         </div>
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
-        <script type="text/ecmascript">
-            $(function () {
-                $("#logOffButton").click(function (e) {
-                    e.preventDefault();
-                    $("#logOffForm").submit();
-                });
+
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script type="text/ecmascript">
+        $(function () {
+            $("#logOffButton").click(function (e) {
+                e.preventDefault();
+                $("#logOffForm").submit();
             });
-        </script>
-    </body>
+        });
+    </script>
+</body>
 </html>

@@ -7,9 +7,14 @@ namespace projektInz.biznes
         public virtual Produkt Produkt { get; protected set; }
         public int Ilosc { get; protected set; }
 
-        public decimal Cena
+        public decimal CenaBrutto
         {
-            get { return Ilosc * Produkt.CenaSprzedazy; }
+            get { return Ilosc * Produkt.CenaSprzedazyBrutto; }
+        }
+
+        public decimal CenaNetto
+        {
+            get { return Ilosc * Produkt.CenaSprzedazyNetto; }
         }
 
         public PozycjaFaktury(Faktura faktura, Produkt produkt, int ilosc)

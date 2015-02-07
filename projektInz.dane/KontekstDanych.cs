@@ -80,8 +80,9 @@ namespace projektInz.dane
             produkty.Property(x => x.Nazwa).HasMaxLength(200).IsRequired().IsUnicode();
             produkty.Property(x => x.Grupa).HasMaxLength(200).IsRequired().IsUnicode();
             produkty.Property(x => x.Stan).IsRequired();
-            produkty.Property(x => x.CenaZakupu).IsRequired();
-            produkty.Property(x => x.CenaSprzedazy).IsRequired();
+            produkty.Property(x => x.Marza).IsRequired();
+            produkty.Property(x => x.StawkaVat).IsRequired();
+            produkty.Property(x => x.CenaZakupuNetto).IsRequired();
             produkty.ToTable("Produkty");
 
             var zamowienia = modelBuilder.Entity<Zamowienie>();

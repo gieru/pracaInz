@@ -16,7 +16,8 @@
                         <th>Numer</th>
                         <th>Stan</th>
                         <th>Ilość pozycji</th>
-                        <th>Wartość</th>
+                        <th>Wartość netto</th>
+                        <th>Wartość brutto</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -27,7 +28,8 @@
                             <td>@zamowienie.Numer</td>
                             <td>@zamowienie.Stan</td>
                             <td>@zamowienie.IloscPozycji</td>
-                            <td>@zamowienie.Wartosc</td>
+                            <td>@zamowienie.WartoscNetto</td>
+                            <td>@zamowienie.WartoscBrutto</td>
                             <td>@Html.ActionLink("Edytuj","EdytujZamowienie",new { id = zamowienie.Id })</td>
                         </tr>
                     }
