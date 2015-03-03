@@ -9,6 +9,7 @@ namespace projektInz.biznes
         public int Id { get; set; }
         public StanZamowienia Stan { get; set; }
         public virtual ICollection<PozycjaZamowienia> Pozycje { get; set; }
+        public virtual Klient Klient { get; protected set; }
 
         public decimal WartoscBrutto
         {
@@ -120,9 +121,14 @@ namespace projektInz.biznes
             }
         }
 
-        public Zamowienie()
+        public Zamowienie(Klient klient)
         {
             Pozycje = new List<PozycjaZamowienia>();
+            Klient = klient;
+        }
+
+        protected Zamowienie()
+        {
         }
     }
 }

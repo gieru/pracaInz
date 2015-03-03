@@ -10,29 +10,51 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
-    <div class="form-group">
-        @Html.LabelFor(m => m.Imie)
-        @Html.TextBoxFor(m => m.Imie, new { @class = "form-control", placeholder = "Wprowadź imię" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Nazwisko)
-        @Html.TextBoxFor(m => m.Nazwisko, new { @class = "form-control", placeholder = "Wprowadź nazwisko" })
-    </div>
-        <div class="form-group">
-        @Html.LabelFor(m => m.Pesel)
-        @Html.TextBoxFor(m => m.Pesel, new { @class = "form-control", placeholder = "Wprowadź PESEL" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.NazwaFirmy, "Nazwa Firmy")
-        @Html.TextBoxFor(m => m.NazwaFirmy, new { @class = "form-control", placeholder = "Wprowadz nazwę firmy" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Nip, "NIP")
-        @Html.TextBoxFor(m => m.Nip, new { @class = "form-control", placeholder = "Podaj numer NIP" })
+
+    <div role="tabpanel">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist" id="typ">
+            <li role="presentation" class="active">
+                <a href="#_firma" id="firma" aria-controls="_firma" role="tab" data-toggle="tab">Firma</a>
+            </li>
+            <li role="presentation">
+                <a href="#_osobaPrywatna" id="osobaPrywatna" aria-controls="_osobaPrywatna" role="tab" data-toggle="tab">Osoba prywatna</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="_firma">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.NazwaFirmy, "Nazwa Firmy")
+                    @Html.TextBoxFor(m => m.NazwaFirmy, new { @class = "form-control", placeholder = "Wprowadz nazwę firmy" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Nip, "NIP")
+                    @Html.TextBoxFor(m => m.Nip, new { @class = "form-control", placeholder = "Podaj numer NIP" })
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="_osobaPrywatna">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Imie)
+                    @Html.TextBoxFor(m => m.Imie, new { @class = "form-control", placeholder = "Wprowadź imię" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Nazwisko)
+                    @Html.TextBoxFor(m => m.Nazwisko, new { @class = "form-control", placeholder = "Wprowadź nazwisko" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Pesel)
+                    @Html.TextBoxFor(m => m.Pesel, new { @class = "form-control", placeholder = "Wprowadź PESEL" })
+                </div>
+            </div>
+        </div>
+
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Adres)
-        @Html.TextBoxFor(m => m.Adres, new { @class = "form-control", placeholder = "Podaj adres firmy" })
+        @Html.TextBoxFor(m => m.Adres, new { @class = "form-control", placeholder = "Podaj adres" })
     </div>  
     <div class="form-group">
         @Html.LabelFor(m => m.NrTel, "Numer Telefonu")
@@ -40,8 +62,19 @@
     </div>  
     <div class="form-group">
         @Html.LabelFor(m => m.Email)
-        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Podaj email firmy" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Podaj email" })
     </div>  
-       
+    @Html.Hidden("typKlienta","firma",new {id = "typKlienta"})
     <input type="submit" class="btn btn-default" value="Dodaj" />
+}
+@section scripts
+{
+    <script>
+        $(function() {
+            $('#typ #' + $('#typKlienta').val()).tab('show');
+        });
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+            $('#typKlienta').val(e.target.id);
+        });
+    </script>
 }

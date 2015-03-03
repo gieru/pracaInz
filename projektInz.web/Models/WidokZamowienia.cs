@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using System.Web.Mvc;
 
 namespace projektInz.web.Models

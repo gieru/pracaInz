@@ -70,13 +70,14 @@ namespace projektInz.web.Controllers
         }
 
         [Authorize(Roles = "sprzedawca")]
-        public ActionResult DodajZamowienie()
+        public ActionResult DodajZamowienie(int id)
         {
             Zamowienie zamowienie;
             using (var dane = new KontekstDanych())
             {
-                //Pobranie
-                zamowienie = new Zamowienie();
+                //Pobranie klienta
+                var klient = dane.Klienci.First(x => x.Id == id);
+                zamowienie = klient.UtworzZamowienie();
                 dane.Zamowienia.Add(zamowienie);
                 dane.SaveChanges();
             }

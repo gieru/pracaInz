@@ -1,14 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Infrastructure.Annotations;
-using System.Data.Entity.ModelConfiguration;
-using System.Web.UI;
 using projektInz.biznes;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace projektInz.dane
 {
@@ -21,7 +14,7 @@ namespace projektInz.dane
         }
 
         public DbSet<Użytkownik> Użytkownicy { get; set; }
-        public DbSet<Klienci> Klienci { get; set; }
+        public DbSet<Klient> Klienci { get; set; }
         public DbSet<Kontrahent> Kontrahenci { get; set; } 
         public DbSet<Produkt> Produkty { get; set; } 
 
@@ -62,15 +55,15 @@ namespace projektInz.dane
             kontrahenci.Property(x => x.Email).HasMaxLength(70).IsRequired();
             kontrahenci.ToTable("Kontrahenci");
 
-            var klienci = modelBuilder.Entity<Klienci>();
-            klienci.HasKey(x => x.id);
-            klienci.Property(x => x.Imie).HasMaxLength(50).IsRequired();
-            klienci.Property(x => x.Nazwisko).HasMaxLength(75).IsRequired();
-            klienci.Property(x => x.Pesel).IsRequired();
+            var klienci = modelBuilder.Entity<Klient>();
+            klienci.HasKey(x => x.Id);
+            klienci.Property(x => x.Imie).HasMaxLength(50);
+            klienci.Property(x => x.Nazwisko).HasMaxLength(75);
+            klienci.Property(x => x.Pesel);
             klienci.Property(x => x.Nip);
             klienci.Property(x => x.NazwaFirmy);
             klienci.Property(x => x.Adres).IsRequired();
-            klienci.Property(x => x.NrTel).IsRequired();
+            klienci.Property(x => x.NrTel);
             klienci.Property(x => x.Email);
             klienci.ToTable("Klienci");
 
@@ -89,6 +82,7 @@ namespace projektInz.dane
             zamowienia.ToTable("Zamowienia");
             zamowienia.HasKey(x => x.Id);
             zamowienia.HasMany(x => x.Pozycje);
+            zamowienia.HasRequired(x => x.Klient);
 
             var pozycjeZamowien = modelBuilder.Entity<PozycjaZamowienia>();
             pozycjeZamowien.HasRequired(p => p.Produkt).WithMany();
@@ -98,6 +92,7 @@ namespace projektInz.dane
             faktury.ToTable("Faktury");
             faktury.HasKey(x => x.Id);
             faktury.HasMany(x => x.Pozycje);
+            faktury.HasRequired(x => x.Klient);
 
             var pozycjeFaktur = modelBuilder.Entity<PozycjaFaktury>();
             pozycjeFaktur.HasRequired(p => p.Produkt).WithMany();

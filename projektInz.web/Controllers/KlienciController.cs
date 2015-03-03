@@ -16,7 +16,7 @@ namespace projektInz.web.Controllers
 
         public ActionResult Index()
         {
-            List<Klienci> wszyscyKlienci;
+            List<Klient> wszyscyKlienci;
             using (var dane = new KontekstDanych())
             {
                 wszyscyKlienci = dane.Klienci.ToList();
@@ -24,11 +24,9 @@ namespace projektInz.web.Controllers
 
             var widoki = wszyscyKlienci.Select(klient => new WidokKlienta
             {
-                Id = klient.id,
-                Imie = klient.Imie,
-                Nazwisko = klient.Nazwisko,
-                NazwaFirmy = klient.NazwaFirmy,
-                Nip = klient.Nip,
+                Id = klient.Id,
+                Nazwa = klient.Nazwa,
+                PeselNip = klient.Identyfikator,
                 Adres = klient.Adres,
                 NrTel = klient.NrTel,
                 Email = klient.Email
@@ -44,13 +42,41 @@ namespace projektInz.web.Controllers
         [HttpPost]
         public ActionResult DodajKlienta(NowyKlient nowyKlient)
         {
+            if (nowyKlient.TypKlienta == TypKlienta.Firma)
+            {
+                if (string.IsNullOrWhiteSpace(nowyKlient.NazwaFirmy))
+                {
+                    ModelState.AddModelError("NazwaFirmy","Nazwa firmy jest wymagana.");
+                }
+                if (string.IsNullOrWhiteSpace(nowyKlient.Nip))
+                {
+                    ModelState.AddModelError("Nip", "Numer NIP jest wymagany.");
+                }
+            }
+            else if (nowyKlient.TypKlienta == TypKlienta.OsobaPrywatna)
+            {
+                if (string.IsNullOrWhiteSpace(nowyKlient.Imie))
+                {
+                    ModelState.AddModelError("Imie", "Imie jest wymagane.");
+                }
+                if (string.IsNullOrWhiteSpace(nowyKlient.Nazwisko))
+                {
+                    ModelState.AddModelError("Nazwisko", "Nazwisko jest wymagane.");
+                }
+                if (string.IsNullOrWhiteSpace(nowyKlient.Pesel))
+                {
+                    ModelState.AddModelError("Pesel", "Pesel jest wymagany.");
+                }
+            }
             if (!ModelState.IsValid)
             {
                 return View();
             }
+            
             using (var dane = new KontekstDanych())
             {
-                var klient = new Klienci(
+                var klient = new Klient(
+                    nowyKlient.TypKlienta,
                     nowyKlient.Imie,
                     nowyKlient.Nazwisko,
                     nowyKlient.Pesel,
@@ -67,18 +93,18 @@ namespace projektInz.web.Controllers
         }
         public ActionResult EdytujKlienta(int id)
         {
-            Klienci klient;
+            Klient klient;
             using (var dane = new KontekstDanych())
             {
-                klient = dane.Klienci.Single(x => x.id == id);
+                klient = dane.Klienci.Single(x => x.Id == id);
             }
             return View(new WidokKlienta
             {
-                Imie = klient.Imie,
-                Nazwisko = klient.Nazwisko,
-                Pesel = klient.Pesel,
-                NazwaFirmy = klient.NazwaFirmy,
-                Nip = klient.Nip,
+                //Imie = klient.Imie,
+                //Nazwisko = klient.Nazwisko,
+                //Pesel = klient.Pesel,
+                //NazwaFirmy = klient.NazwaFirmy,
+                //Nip = klient.Nip,
                 Adres = klient.Adres,
                 NrTel = klient.NrTel,
                 Email = klient.Email
@@ -94,7 +120,7 @@ namespace projektInz.web.Controllers
             }
             using (var dane = new KontekstDanych())
             {
-                var klient = dane.Klienci.Single(x => x.id == edytowanyKlient.Id);
+                var klient = dane.Klienci.Single(x => x.Id == edytowanyKlient.Id);
 
                 klient.ZmienKlienta(edytowanyKlient.Imie,
                     edytowanyKlient.Nazwisko,

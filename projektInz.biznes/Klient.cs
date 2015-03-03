@@ -1,8 +1,9 @@
 ﻿namespace projektInz.biznes
 {
-    public class Klienci
+    public class Klient
     {
-        public int id { get; set; }
+        public int Id { get; set; }
+        public TypKlienta TypKlienta { get; set; }
         public string Imie { get; set; }
         public string Nazwisko { get; set; }
         public string Pesel { get; set; }
@@ -11,14 +12,41 @@
         public string Adres { get; set; }
         public string NrTel { get; set; }
         public string Email { get; set; }
+        public TypKlienta Typ { get; set; }
 
-        public Klienci()
+        public string Nazwa
+        {
+            get
+            {
+                return Typ == TypKlienta.Firma 
+                    ? NazwaFirmy 
+                    : string.Format("{0} {1}", Imie, Nazwisko);
+            }
+        }
+
+        public string Identyfikator
+        {
+            get
+            {
+                return Typ == TypKlienta.Firma 
+                    ? Nip 
+                    : Pesel;
+            }
+        }
+
+        public Zamowienie UtworzZamowienie()
+        {
+            return new Zamowienie(this);
+        }
+
+        public Klient()
         {
         }
         //Dodanie
-        public Klienci(string imie, string nazwisko, string PESEL, string firma, string nip, string adres,
+        public Klient(TypKlienta typKlienta, string imie, string nazwisko, string PESEL, string firma, string nip, string adres,
             string tel, string email)
         {
+            TypKlienta = typKlienta;
             Imie = imie;
             Nazwisko = nazwisko;
             Pesel = PESEL;

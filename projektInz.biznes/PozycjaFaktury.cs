@@ -23,6 +23,10 @@ namespace projektInz.biznes
             Produkt = produkt;
             Ilosc = ilosc;
         }
+
+        protected PozycjaFaktury()
+        {
+        }
     }
 
 }

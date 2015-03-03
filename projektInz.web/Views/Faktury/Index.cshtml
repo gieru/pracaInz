@@ -1,7 +1,7 @@
-﻿@model System.Collections.Generic.List<projektInz.web.Models.WidokZamowienia>
+﻿@model projektInz.web.Models.FakturyKlienta
 
 @{
-    ViewBag.Title = "Zamówienia";
+    ViewBag.Title = "Faktury klienta "+Model.Nazwa + " ("+Model.Identyfikator + ")";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,7 +14,6 @@
                 <thead>
                     <tr>
                         <th>Numer</th>
-                        <th>Stan</th>
                         <th>Ilość pozycji</th>
                         <th>Wartość netto</th>
                         <th>Wartość brutto</th>
@@ -22,15 +21,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var zamowienie in this.Model)
+                    @foreach (var faktura in this.Model.Faktury)
                     {
                         <tr>
-                            <td>@zamowienie.Numer</td>
-                            <td>@zamowienie.Stan</td>
-                            <td>@zamowienie.IloscPozycji</td>
-                            <td>@zamowienie.WartoscNetto.ToString("##.00")</td>
-                            <td>@zamowienie.WartoscBrutto.ToString("##.00")</td>
-                            <td>@Html.ActionLink("Edytuj","EdytujZamowienie",new { id = zamowienie.Id })</td>
+                            <td>@faktura.Numer</td>
+                            <td>@faktura.IloscPozycji</td>
+                            <td>@faktura.WartoscNetto</td>
+                            <td>@faktura.WartoscBrutto</td>
+                            <td>@Html.ActionLink("Drukuj","Drukuj",new { id = faktura.Id},new { target="_blank" })</td>
                         </tr>
                     }
                 </tbody>
