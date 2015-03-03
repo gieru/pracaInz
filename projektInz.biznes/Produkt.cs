@@ -79,5 +79,10 @@ namespace projektInz.biznes
             CenaZakupuNetto = cenaZakupuNetto;
             Marza = marza;
         }
+
+        public ZamowienieProduktu Zamow(decimal ilosc, string jm)
+        {
+            return new ZamowienieProduktu(this, ilosc, jm);
+        }
     }
 }

@@ -1,0 +1,28 @@
+﻿@model projektInz.web.Models.WidokZamawianegoProduktu
+@{
+    ViewBag.Title = "Zamow";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Zamów @Model.Produkt</h2>
+
+@using (Html.BeginForm("Zamow", "ZamowieniaProduktu", FormMethod.Post, new { role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    
+    <div class="form-group">
+        @Html.HiddenFor(m => m.IdProduktu)
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.JM)
+        @Html.TextBoxFor(m => m.JM, new { @class = "form-control", placeholder = "Wprowadź jednostkę miary" })
+    </div>    
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.Ilosc)
+        @Html.TextBoxFor(m => m.Ilosc, new { @class = "form-control", placeholder = "Wprowadź ilość" })
+    </div>
+    <input type="submit" value="Zamów" />
+}

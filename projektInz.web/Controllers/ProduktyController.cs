@@ -8,7 +8,7 @@ using projektInz.web.Models;
 
 namespace projektInz.web.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin, magazynier")]
     public class ProduktyController : Controller
     {
         public ActionResult Index()
@@ -107,5 +107,7 @@ namespace projektInz.web.Controllers
             //Przenosi uzytkownika do innej akcji (index)
             return RedirectToAction("Index");
         }
+
+        
     }
 }

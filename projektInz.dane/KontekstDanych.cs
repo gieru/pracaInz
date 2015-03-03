@@ -16,7 +16,8 @@ namespace projektInz.dane
         public DbSet<Użytkownik> Użytkownicy { get; set; }
         public DbSet<Klient> Klienci { get; set; }
         public DbSet<Kontrahent> Kontrahenci { get; set; } 
-        public DbSet<Produkt> Produkty { get; set; } 
+        public DbSet<Produkt> Produkty { get; set; }
+        public DbSet<ZamowienieProduktu> ZamowieniaProduktow { get; set; } 
 
         public DbSet<Zamowienie> Zamowienia { get; set; } 
         public DbSet<PozycjaZamowienia> PozycjeZamowien { get; set; } 
@@ -79,6 +80,14 @@ namespace projektInz.dane
             produkty.Property(x => x.StawkaVat).IsRequired();
             produkty.Property(x => x.CenaZakupuNetto).IsRequired();
             produkty.ToTable("Produkty");
+
+            var zamowieniaProduktow = modelBuilder.Entity<ZamowienieProduktu>();
+            zamowieniaProduktow.ToTable("ZamowieniaProduktow");
+            zamowieniaProduktow.HasKey(x => x.Id);
+            zamowieniaProduktow.HasRequired(x => x.Produkt);
+            zamowieniaProduktow.Property(x => x.JM);
+            zamowieniaProduktow.Property(x => x.DataZlozenia);
+            zamowieniaProduktow.Property(x => x.Ilosc);
 
             var zamowienia = modelBuilder.Entity<Zamowienie>();
             zamowienia.ToTable("Zamowienia");

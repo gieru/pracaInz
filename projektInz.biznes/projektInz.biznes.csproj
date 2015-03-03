@@ -52,6 +52,7 @@
     <Compile Include="Użytkownik.cs" />
     <Compile Include="WZ.cs" />
     <Compile Include="Zamowienie.cs" />
+    <Compile Include="ZamowienieProduktu.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

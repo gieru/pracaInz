@@ -38,13 +38,15 @@ namespace projektInz.web.Controllers
                 return View(KonwertujDoWidoku(faktura));
             }
         }
-        
-        public ActionResult DrukujWZ(int id)
+
+        [Authorize(Roles = "admin, kasjer, magazynier")]
+        public ActionResult DrukujWZ(int id, bool? useLayout = false)
         {
             using (var dane = new KontekstDanych())
             {
                 var wz = dane.WZ.First(x => x.Id == id);
                 ViewBag.NumerWZ = wz.Numer;
+                ViewBag.UseLayout = useLayout;
                 return View(KonwertujDoWidoku(wz.Faktura));
             }
         }

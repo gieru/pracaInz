@@ -1,0 +1,33 @@
+﻿@model List<projektInz.web.Models.WidokWZ>
+
+@{
+    ViewBag.Title = "WZ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h2>WZ</h2>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Numer</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var wz in this.Model)
+                    {
+                        <tr>
+                            <td>@wz.Numer</td>
+                            <td>@Html.ActionLink("Drukuj","DrukujWZ","Faktury",new { id = wz.Id, useLayout = true},new { })</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

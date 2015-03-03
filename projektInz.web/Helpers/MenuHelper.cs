@@ -17,10 +17,12 @@ namespace projektInz.web.Helpers
         private static Type[] kontrolery =
         {
             typeof(ProduktyController),
+            typeof(ZamowieniaProduktuController),
             typeof(KontrahenciController),
             typeof(UzytkownicyController),
             typeof(KlienciController),
             typeof(ZamowieniaController),
+            typeof(WZController),
         };
 
    
