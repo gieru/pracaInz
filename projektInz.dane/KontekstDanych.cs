@@ -71,7 +71,8 @@ namespace projektInz.dane
             var produkty = modelBuilder.Entity<Produkt>();
             produkty.HasKey(x => x.Id);
             produkty.Property(x => x.Nazwa).HasMaxLength(200).IsRequired().IsUnicode();
-            produkty.Property(x => x.Grupa).HasMaxLength(200).IsRequired().IsUnicode();
+            produkty.Property(x => x.Grupa).HasMaxLength(200).IsUnicode();
+            produkty.Property(x => x.JM).HasMaxLength(4).IsRequired().IsUnicode();
             produkty.Property(x => x.Stan).IsRequired();
             produkty.Property(x => x.Marza).IsRequired();
             produkty.Property(x => x.StawkaVat).IsRequired();

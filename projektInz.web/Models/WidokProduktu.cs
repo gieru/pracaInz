@@ -9,6 +9,7 @@ namespace projektInz.web.Models
         public string Nazwa { get; set; }
         public string DataWprowadzenia { get; set; }
         public string Grupa { get; set; }
+        public string JM { get; set; }
         public decimal Stan { get; set; }
         public int StawkaVat { get; set; }
         public int Marza { get; set; }
@@ -24,6 +25,7 @@ namespace projektInz.web.Models
         public string Nazwa { get; set; }
         [Required]
         public string Grupa { get; set; }
+        public string JM { get; set; }
         public decimal Stan { get; set; }
         public int StawkaVat { get; set; }
         public int Marza { get; set; }
@@ -37,6 +39,7 @@ namespace projektInz.web.Models
         [Required]
         public string Nazwa { get; set; }
         public string Grupa { get; set; }
+        public string JM { get; set; }
         public decimal Stan { get; set; }
         public int StawkaVat { get; set; }
         public int Marza { get; set; }

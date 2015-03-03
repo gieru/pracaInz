@@ -36,6 +36,7 @@ namespace projektInz.web.Controllers
                 CenaSprzedazyNetto = produkt.CenaSprzedazyNetto,
                 CenaZakupuNetto = produkt.CenaZakupuNetto,
                 Grupa = produkt.Grupa,
+                JM = produkt.JM,
                 Stan = produkt.Stan,
                 StawkaVat = (int) (produkt.StawkaVat * 100),
                 Marza = (int)(produkt.Marza * 100)
@@ -64,6 +65,7 @@ namespace projektInz.web.Controllers
                 var produkt = dane.Produkty.Single(x => x.Id == edytowanyProdukt.Id);
                 produkt.ZmienProdukt(edytowanyProdukt.Nazwa,
                     edytowanyProdukt.Grupa, 
+                    edytowanyProdukt.JM, 
                     edytowanyProdukt.Stan, 
                     (decimal)edytowanyProdukt.StawkaVat / 100, 
                     edytowanyProdukt.CenaZakupuNetto,
@@ -92,6 +94,7 @@ namespace projektInz.web.Controllers
             {
                 var produkt = new Produkt(nowyProdukt.Nazwa,
                     nowyProdukt.Grupa,
+                    nowyProdukt.JM,
                     nowyProdukt.Stan,
                     (decimal)nowyProdukt.StawkaVat / 100,
                     nowyProdukt.CenaZakupuNetto,

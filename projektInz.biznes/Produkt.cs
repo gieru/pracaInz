@@ -7,6 +7,7 @@ namespace projektInz.biznes
         public int Id { get; set; }
         public string Nazwa { get; set; }
         public string Grupa { get; set; }
+        public string JM { get; set; } //jednostka miary
         public decimal Stan { get; set; }
         public decimal Marza { get; set; }
         public decimal CenaZakupuNetto { get; set; }
@@ -44,7 +45,7 @@ namespace projektInz.biznes
         {
         }
         //dodaj produkt
-        public Produkt(string nazwa, string grupa, decimal stan, decimal stawkaVat, decimal cenaZakupuNetto,
+        public Produkt(string nazwa, string grupa, string jm, decimal stan, decimal stawkaVat, decimal cenaZakupuNetto,
             decimal marza)
         {
             if (stawkaVat > 1)
@@ -54,6 +55,7 @@ namespace projektInz.biznes
             DataWprowadzenia = DateTime.Now;
             Nazwa = nazwa;
             Grupa = grupa;
+            JM = jm;
             Stan = stan;
             StawkaVat = stawkaVat;
             CenaZakupuNetto = cenaZakupuNetto;
@@ -61,7 +63,7 @@ namespace projektInz.biznes
         }
 
         //edytacja produktu
-        public void ZmienProdukt(string nazwa, string grupa, decimal stan, decimal stawkaVat, decimal cenaZakupuNetto,
+        public void ZmienProdukt(string nazwa, string grupa,string jm, decimal stan, decimal stawkaVat, decimal cenaZakupuNetto,
             decimal marza)
         {
             if (stawkaVat > 1)
@@ -71,6 +73,7 @@ namespace projektInz.biznes
             DataWprowadzenia = DateTime.Now;
             Nazwa = nazwa;
             Grupa = grupa;
+            JM = jm;
             Stan = stan;
             StawkaVat = stawkaVat;
             CenaZakupuNetto = cenaZakupuNetto;

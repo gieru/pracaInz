@@ -7,7 +7,7 @@
 
 <h2>Edytuj produkt</h2>
 
-@using (Html.BeginForm("EdytujProdukt", "Produkty", FormMethod.Post, new {role = "form"} ))
+@using (Html.BeginForm("EdytujProdukt", "Produkty", FormMethod.Post, new { role = "form" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
@@ -21,28 +21,32 @@
         @Html.TextBoxFor(m => m.Nazwa, new { @class = "form-control", placeholder = "Wprowadź nazwę" })
     </div>    
     
-     <div class="form-group">
+    <div class="form-group">
         @Html.LabelFor(m => m.Grupa)
-        @Html.TextBoxFor(m => m.Grupa,new { @class = "form-control", placeholder = "Wprowadź nazwę grupy towaru" })  
+        @Html.TextBoxFor(m => m.Grupa, new { @class = "form-control", placeholder = "Wprowadź nazwę grupy towaru" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.JM, "Jednostka Miary")
+        @Html.TextBoxFor(m => m.JM, new { @class = "form-control", placeholder = "Wprowadź jednoskę miary (kg / ml / l)" })
     </div>
     
     <div class="form-group">
         @Html.LabelFor(m => m.Stan)
-        @Html.TextBoxFor(m => m.Stan,new { @class = "form-control", placeholder = "Wprowadź stan" }) 
+        @Html.TextBoxFor(m => m.Stan, new { @class = "form-control", placeholder = "Wprowadź stan" })
     </div>    
     
     <div class="form-group">
         @Html.LabelFor(m => m.StawkaVat, "Stawka VAT w %")
-        @Html.TextBoxFor(m => m.StawkaVat,new { @class = "form-control", placeholder = "Wprowadź stawkę VAT" }) 
+        @Html.TextBoxFor(m => m.StawkaVat, new { @class = "form-control", placeholder = "Wprowadź stawkę VAT" })
     </div>
     
     <div class="form-group">
         @Html.LabelFor(m => m.CenaZakupuNetto, "Cena Zakupu")
-        @Html.TextBoxFor(m => m.CenaZakupuNetto,new { @class = "form-control", placeholder = "Wprowadź cene zakupu towaru netto" })
+        @Html.TextBoxFor(m => m.CenaZakupuNetto, new { @class = "form-control", placeholder = "Wprowadź cene zakupu towaru netto" })
     </div>   
-      <div class="form-group">
+    <div class="form-group">
         @Html.LabelFor(m => m.Marza, "Marża w %")
-        @Html.TextBoxFor(m => m.Marza,new { @class = "form-control", placeholder = "Wprowadź marżę" })
+        @Html.TextBoxFor(m => m.Marza, new { @class = "form-control", placeholder = "Wprowadź marżę" })
     </div> 
-    <input type="submit" class="btn btn-info btn-circle btn-xl" value="+" />
+    <input type="submit" value="Dodaj" />
 }
