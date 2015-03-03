@@ -1,9 +1,10 @@
-﻿namespace projektInz.biznes
+﻿using System;
+
+namespace projektInz.biznes
 {
     public class Klient
     {
         public int Id { get; set; }
-        public TypKlienta TypKlienta { get; set; }
         public string Imie { get; set; }
         public string Nazwisko { get; set; }
         public string Pesel { get; set; }
@@ -46,7 +47,7 @@
         public Klient(TypKlienta typKlienta, string imie, string nazwisko, string PESEL, string firma, string nip, string adres,
             string tel, string email)
         {
-            TypKlienta = typKlienta;
+            Typ = typKlienta;
             Imie = imie;
             Nazwisko = nazwisko;
             Pesel = PESEL;
@@ -57,14 +58,26 @@
             Email = email;
         }
         //Edycja
-        public void ZmienKlienta(string imie, string nazwisko, string PESEL, string firma, string nip, string adres,
-            string tel, string email)
+        public void ModyfikujDaneOsobyPrywatnej(string imie, string nazwisko, string adres, string tel, string email)
         {
+            if (Typ != TypKlienta.OsobaPrywatna)
+            {
+                throw new InvalidOperationException("Oczekiwano osoby prywatnej");
+            }
             Imie = imie;
             Nazwisko = nazwisko;
-            Pesel = PESEL;
+            Adres = adres;
+            NrTel = tel;
+            Email = email;
+        }
+        
+        public void ModyfikujDaneFirmy(string firma, string adres, string tel, string email)
+        {
+            if (Typ != TypKlienta.Firma)
+            {
+                throw new InvalidOperationException("Oczekiwano firmy");
+            }
             NazwaFirmy = firma;
-            Nip = nip;
             Adres = adres;
             NrTel = tel;
             Email = email;

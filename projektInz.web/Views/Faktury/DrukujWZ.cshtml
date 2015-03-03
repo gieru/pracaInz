@@ -1,0 +1,130 @@
+﻿@model projektInz.web.Models.WidokWydrukuFaktury
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wydanie na zewnątrz (WZ) @ViewBag.NumerWZ</title>
+    <style>
+        @@import url(http://fonts.googleapis.com/css?family=Bree+Serif);
+
+        body, h1, h2, h3, h4, h5, h6 {
+            font-family: 'Bree Serif', serif;
+        }
+    </style>
+    @Styles.Render("~/Content/bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6">
+            </div>
+            <div class="col-xs-6 text-right">
+                <h1>Wydanie na zewnątrz (WZ)</h1>
+                <h1><small>@ViewBag.NumerWZ</small></h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Sprzedawca</h3>
+                           <h4> Tomasz Gierczak</h4>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            ul. Słoneczna 28
+                            <br>
+                            27-425 Kielce
+                            <br>
+                            655-125-25-33
+                            <br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-5 col-xs-offset-2 text-right">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Nabywca</h3>
+                           <h4>@Model.NazwaKlienta</h4> 
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            @Model.AdresKlienta
+                            <br>
+                            @Model.IdentyfikatorKlienta
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / end client details section -->
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        <h4>Produkt</h4>
+                    </th>
+                    <th>
+                        <h4>JM</h4>
+                    </th>
+                    <th>
+                        <h4>Ilość</h4>
+                    </th>
+                    <th>
+                        <h4>Cena jednostkowa netto</h4>
+                    </th>
+                    <th>
+                        <h4>Cena netto</h4>
+                    </th>
+                    <th>
+                        <h4>Cena brutto</h4>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pozycja in this.Model.Pozycje)
+                {
+                    <tr>
+                        <td>@pozycja.Produkt</td>
+                        <td>@pozycja.JM</td>
+                        <td>@pozycja.Ilosc</td>
+                        <td class="text-right">@pozycja.CenaJednostkowaNetto.ToString("##.00")</td>
+                        <td class="text-right">@pozycja.CenaNetto.ToString("##.00")</td>
+                        <td class="text-right">@pozycja.CenaBrutto.ToString("##.##")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="row text-right">
+            <div class="col-xs-2 col-xs-offset-8">
+                <p>
+                    <strong>Netto :
+                        <br>
+                        Podatek :
+                        <br>
+                        Brutto :
+                        <br>
+                    </strong>
+                </p>
+            </div>
+            <div class="col-xs-2">
+                <strong>
+                    @Model.WartoscNetto.ToString("##.00")
+                    <br>
+                    @Model.Podatek.ToString("##.00")
+                    <br>
+                    @Model.WartoscBrutto.ToString("##.00")
+                    <br>
+                </strong>
+            </div>
+        </div> 
+    </div>
+</body>
+</html>

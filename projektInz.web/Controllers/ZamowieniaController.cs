@@ -12,7 +12,7 @@ namespace projektInz.web.Controllers
     [Authorize(Roles = "admin, sprzedawca, kasjer")]
     public class ZamowieniaController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(int? wzId = null)
         {
             List<Zamowienie> wszystkieZamowienia;
             //Otworz polaczenie z baza danych
@@ -22,7 +22,7 @@ namespace projektInz.web.Controllers
                 wszystkieZamowienia = dane.Zamowienia.ToList();
                 var widoki = wszystkieZamowienia.Select(UtworzWidokZamowienia).ToList();
                 //Wyrenderuj widok na bazie modelu widoki
-
+                ViewBag.WzId = wzId;
                 return View(widoki);
             }
         }
@@ -37,6 +37,7 @@ namespace projektInz.web.Controllers
                 IloscPozycji = zamowienie.Pozycje.Count,
                 WartoscBrutto = zamowienie.WartoscBrutto,
                 WartoscNetto = zamowienie.WartoscNetto,
+                WZ = zamowienie.WZ != null ? zamowienie.WZ.Id : -1
             };
         }
         private EdytowaneZamowienie UtworzEdytowaneZamowienie(Zamowienie zamowienie, IEnumerable<Produkt> produkty)
@@ -195,9 +196,10 @@ namespace projektInz.web.Controllers
             using (var dane = new KontekstDanych())
             {
                 var zamowienie = dane.Zamowienia.First(x => x.Id == id);
-                zamowienie.Oplacono();
+                var wz = zamowienie.Oplacono();
+                dane.WZ.Add(wz);
                 dane.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index",new {wzId = wz.Id});
             }
         }
 

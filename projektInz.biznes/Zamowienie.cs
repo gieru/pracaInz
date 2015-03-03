@@ -10,6 +10,8 @@ namespace projektInz.biznes
         public StanZamowienia Stan { get; set; }
         public virtual ICollection<PozycjaZamowienia> Pozycje { get; set; }
         public virtual Klient Klient { get; protected set; }
+        public virtual Faktura Faktura { get; protected set; }
+        public virtual WZ WZ { get; protected set; }
 
         public decimal WartoscBrutto
         {
@@ -78,7 +80,8 @@ namespace projektInz.biznes
         {
             SprawdzStan(MoznaZatwierdzic);
             Stan = StanZamowienia.DoZaplacenia;
-            return new Faktura(this, generatorNumerowFaktur.GenerujNumer(DateTime.Now));
+            Faktura = new Faktura(this, generatorNumerowFaktur.GenerujNumer(DateTime.Now));
+            return Faktura;
         }
 
         public bool MoznaZatwierdzic
@@ -91,10 +94,12 @@ namespace projektInz.biznes
             get { return Stan == StanZamowienia.Nowe; }
         }
       
-        public void Oplacono()
+        public WZ Oplacono()
         {
             SprawdzStan(MoznaOplacic);
             Stan = StanZamowienia.Oplacone;
+            WZ = new WZ(Faktura);
+            return WZ;
         }
 
         public bool MoznaOplacic

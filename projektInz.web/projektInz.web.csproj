@@ -319,9 +319,11 @@
     <Content Include="Views\Zamowienia\EdytujZamowienie.cshtml" />
     <Content Include="Views\Klienci\Index.cshtml" />
     <Content Include="Views\Klienci\DodajKlienta.cshtml" />
-    <Content Include="Views\Klienci\EdytujKlienta.cshtml" />
+    <Content Include="Views\Klienci\EdytujOsobePrywatna.cshtml" />
     <Content Include="Views\Faktury\Index.cshtml" />
     <Content Include="Views\Faktury\Drukuj.cshtml" />
+    <Content Include="Views\Faktury\DrukujWZ.cshtml" />
+    <Content Include="Views\Klienci\EdytujFirme.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\projektInz.biznes\projektInz.biznes.csproj">

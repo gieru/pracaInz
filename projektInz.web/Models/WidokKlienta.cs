@@ -32,7 +32,43 @@ namespace projektInz.web.Models
         public string NrTel { get; set; }
         public string Email { get; set; }
     }
-    public class EdytowanyKlient
+
+    public class WidokOsobyPrywatnej
+    {
+        public int Id { get; set; }
+        public string Imie { get; set; }
+        public string Nazwisko { get; set; }
+        public string Pesel { get; set; }
+        public string Adres { get; set; }
+        public string NrTel { get; set; }
+        public string Email { get; set; }
+    }
+    
+    public class WidokFirmy
+    {
+        public int Id { get; set; }
+        public string NazwaFirmy { get; set; }
+        public string Nip { get; set; }
+        public string Adres { get; set; }
+        public string NrTel { get; set; }
+        public string Email { get; set; }
+    }
+
+    public class EdytowanaFirma
+    {
+        public int Id { get; set; }
+        [MinLength(3)]
+        [Required]
+        public string NazwaFirmy { get; set; }
+        [Required]
+        public string Adres { get; set; }
+
+        public string NrTel { get; set; }
+        public string Email { get; set; }
+
+    }
+    
+    public class EdytowanaOsobaPrywatna
     {
         public int Id { get; set; }
         [MinLength(3)]
@@ -41,14 +77,8 @@ namespace projektInz.web.Models
         [Required]
         public string Nazwisko { get; set; }
         [Required]
-        public string Pesel { get; set; }
-        [Required]
-        public string NazwaFirmy { get; set; }
-        [Required]
-        public string Nip { get; set; }
-        [Required]
         public string Adres { get; set; }
-        [Required]
+
         public string NrTel { get; set; }
         public string Email { get; set; }
 

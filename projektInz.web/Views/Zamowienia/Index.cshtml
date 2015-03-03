@@ -30,7 +30,13 @@
                             <td>@zamowienie.IloscPozycji</td>
                             <td>@zamowienie.WartoscNetto.ToString("##.00")</td>
                             <td>@zamowienie.WartoscBrutto.ToString("##.00")</td>
-                            <td>@Html.ActionLink("Edytuj","EdytujZamowienie",new { id = zamowienie.Id })</td>
+                            <td>@Html.ActionLink("Edytuj","EdytujZamowienie",new { id = zamowienie.Id }) 
+                                @if (zamowienie.WZ != -1)
+                                {
+                                    <span>|</span>
+                                    @Html.ActionLink("Drukuj WZ", "DrukujWZ", "Faktury", new {id = zamowienie.WZ}, new {target = "_blank", id="wz-"+zamowienie.WZ})
+                                }
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -38,4 +44,17 @@
         </div>
     </div>
 </div>
-
+@section scripts
+{
+    @if (ViewBag.WzId != null)
+    {
+        <script>
+            $(function() {
+                var link = $('#wz-@ViewBag.WzId');
+                var target = link.attr("target");
+                var win = window.open(link.attr("href"), target);
+                win.focus();
+            });
+        </script>
+    }
+}

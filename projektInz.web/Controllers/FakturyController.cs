@@ -35,25 +35,41 @@ namespace projektInz.web.Controllers
             using (var dane = new KontekstDanych())
             {
                 var faktura = dane.Faktury.First(x => x.Id == id);
-                return View(new WidokWydrukuFaktury()
-                {
-                    AdresKlienta = faktura.AdresKlienta,
-                    IdentyfikatorKlienta = faktura.NumerIdentyfikacyjnyKlienta,
-                    NazwaKlienta = faktura.NazwaKlienta,
-                    Numer = faktura.Numer,
-                    Podatek = faktura.Podatek,
-                    WartoscBrutto = faktura.WartoscBrutto,
-                    WartoscNetto = faktura.WartoscNetto,
-                    Pozycje = faktura.Pozycje.Select(poz => new WidokPozycjiFaktury()
-                    {
-                        Produkt = poz.Produkt.Nazwa,
-                        CenaBrutto = poz.CenaBrutto,
-                        CenaNetto = poz.CenaNetto,
-                        CenaJednostkowaNetto = poz.Produkt.CenaSprzedazyNetto,
-                        Ilosc = poz.Ilosc
-                    }).ToList()
-                });
+                return View(KonwertujDoWidoku(faktura));
             }
+        }
+        
+        public ActionResult DrukujWZ(int id)
+        {
+            using (var dane = new KontekstDanych())
+            {
+                var wz = dane.WZ.First(x => x.Id == id);
+                ViewBag.NumerWZ = wz.Numer;
+                return View(KonwertujDoWidoku(wz.Faktura));
+            }
+        }
+
+        private static WidokWydrukuFaktury KonwertujDoWidoku(Faktura faktura)
+        {
+            return new WidokWydrukuFaktury()
+            {
+                AdresKlienta = faktura.AdresKlienta,
+                IdentyfikatorKlienta = faktura.NumerIdentyfikacyjnyKlienta,
+                NazwaKlienta = faktura.NazwaKlienta,
+                Numer = faktura.Numer,
+                Podatek = faktura.Podatek,
+                WartoscBrutto = faktura.WartoscBrutto,
+                WartoscNetto = faktura.WartoscNetto,
+                Pozycje = faktura.Pozycje.Select(poz => new WidokPozycjiFaktury()
+                {
+                    Produkt = poz.Produkt.Nazwa,
+                    CenaBrutto = poz.CenaBrutto,
+                    CenaNetto = poz.CenaNetto,
+                    CenaJednostkowaNetto = poz.Produkt.CenaSprzedazyNetto,
+                    Ilosc = poz.Ilosc,
+                    JM = poz.Produkt.JM
+                }).ToList()
+            };
         }
 
         private static WidokFaktury UtworzWidokFaktury(Faktura faktura)

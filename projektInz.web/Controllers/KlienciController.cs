@@ -98,13 +98,22 @@ namespace projektInz.web.Controllers
             {
                 klient = dane.Klienci.Single(x => x.Id == id);
             }
-            return View(new WidokKlienta
+            if (klient.Typ == TypKlienta.Firma)
             {
-                //Imie = klient.Imie,
-                //Nazwisko = klient.Nazwisko,
-                //Pesel = klient.Pesel,
-                //NazwaFirmy = klient.NazwaFirmy,
-                //Nip = klient.Nip,
+                return View("EdytujFirme", new WidokFirmy
+                {
+                    NazwaFirmy = klient.NazwaFirmy,
+                    Nip = klient.Nip,
+                    Adres = klient.Adres,
+                    NrTel = klient.NrTel,
+                    Email = klient.Email
+                });
+            }
+            return View("EdytujOsobePrywatna", new WidokOsobyPrywatnej
+            {
+                Imie = klient.Imie,
+                Nazwisko = klient.Nazwisko,
+                Pesel = klient.Pesel,
                 Adres = klient.Adres,
                 NrTel = klient.NrTel,
                 Email = klient.Email
@@ -112,7 +121,7 @@ namespace projektInz.web.Controllers
         }
 
         [HttpPost]
-        public ActionResult EdytujKlienta(EdytowanyKlient edytowanyKlient)
+        public ActionResult EdytujOsobePrywatna(EdytowanaOsobaPrywatna osobaPrywatna)
         {
             if (!ModelState.IsValid)
             {
@@ -120,16 +129,34 @@ namespace projektInz.web.Controllers
             }
             using (var dane = new KontekstDanych())
             {
-                var klient = dane.Klienci.Single(x => x.Id == edytowanyKlient.Id);
+                var klient = dane.Klienci.Single(x => x.Id == osobaPrywatna.Id);
 
-                klient.ZmienKlienta(edytowanyKlient.Imie,
-                    edytowanyKlient.Nazwisko,
-                    edytowanyKlient.Pesel,
-                    edytowanyKlient.NazwaFirmy,
-                    edytowanyKlient.Adres,
-                    edytowanyKlient.Nip,
-                    edytowanyKlient.NrTel,
-                    edytowanyKlient.Email);
+                klient.ModyfikujDaneOsobyPrywatnej(osobaPrywatna.Imie,
+                    osobaPrywatna.Nazwisko,
+                    osobaPrywatna.Adres,
+                    osobaPrywatna.NrTel,
+                    osobaPrywatna.Email);
+                dane.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+        
+        [HttpPost]
+        public ActionResult EdytujFirme(EdytowanaFirma edytowanaFirma)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            using (var dane = new KontekstDanych())
+            {
+                var klient = dane.Klienci.Single(x => x.Id == edytowanaFirma.Id);
+
+                klient.ModyfikujDaneFirmy(
+                    edytowanaFirma.NazwaFirmy,
+                    edytowanaFirma.Adres,
+                    edytowanaFirma.NrTel,
+                    edytowanaFirma.Email);
                 dane.SaveChanges();
             }
             return RedirectToAction("Index");

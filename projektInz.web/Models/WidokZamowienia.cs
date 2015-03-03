@@ -12,6 +12,7 @@ namespace projektInz.web.Models
         public int IloscPozycji { get; set; }
         public decimal WartoscNetto { get; set; }
         public decimal WartoscBrutto { get; set; }
+        public int WZ { get; set; }
     }
 
     public class NoweZamowienie

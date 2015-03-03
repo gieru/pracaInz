@@ -22,6 +22,7 @@ namespace projektInz.dane
         public DbSet<PozycjaZamowienia> PozycjeZamowien { get; set; } 
 
         public DbSet<Faktura> Faktury { get; set; }
+        public DbSet<WZ> WZ { get; set; }
         public DbSet<PozycjaFaktury> PozycjeFaktur { get; set; }
 
         public DbSet<GeneratorNumerowFaktur> GeneratoryNumerowFaktur { get; set; }
@@ -84,6 +85,8 @@ namespace projektInz.dane
             zamowienia.HasKey(x => x.Id);
             zamowienia.HasMany(x => x.Pozycje);
             zamowienia.HasRequired(x => x.Klient);
+            zamowienia.HasOptional(x => x.Faktura);
+            zamowienia.HasOptional(x => x.WZ);
 
             var pozycjeZamowien = modelBuilder.Entity<PozycjaZamowienia>();
             pozycjeZamowien.HasRequired(p => p.Produkt).WithMany();
@@ -98,6 +101,11 @@ namespace projektInz.dane
             var pozycjeFaktur = modelBuilder.Entity<PozycjaFaktury>();
             pozycjeFaktur.HasRequired(p => p.Produkt).WithMany();
             pozycjeFaktur.ToTable("PozycjeFaktury");
+
+            var wz = modelBuilder.Entity<WZ>();
+            wz.ToTable("WZ");
+            wz.HasKey(x => x.Id);
+            wz.HasRequired(x => x.Faktura);
         }
     }
 }

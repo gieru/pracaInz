@@ -50,6 +50,7 @@
     <Compile Include="StanZamowienia.cs" />
     <Compile Include="TypKlienta.cs" />
     <Compile Include="Użytkownik.cs" />
+    <Compile Include="WZ.cs" />
     <Compile Include="Zamowienie.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

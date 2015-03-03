@@ -37,5 +37,6 @@ namespace projektInz.web.Models
         public decimal CenaJednostkowaNetto { get; set; }
         public decimal CenaBrutto { get; set; }
         public decimal CenaNetto { get; set; }
+        public string JM { get; set; }
     }
 }

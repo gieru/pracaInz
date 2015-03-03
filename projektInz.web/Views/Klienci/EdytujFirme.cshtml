@@ -1,4 +1,4 @@
-﻿@model projektInz.web.Models.WidokKlienta
+﻿@model projektInz.web.Models.WidokFirmy
 
 @{
     ViewBag.Title = "Edytuj klienta";
@@ -7,31 +7,15 @@
 
 <h2>Edytuj Klienta</h2>
 
-@using (Html.BeginForm("EdytujKlienta", "Klienci", FormMethod.Post, new {role = "form"}))
+@using (Html.BeginForm("EdytujFirme", "Klienci", FormMethod.Post, new {role = "form"}))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
 
     @Html.HiddenFor(m => m.Id)
     <div class="form-group">
-        @Html.LabelFor(m => m.Imie)
-        @Html.TextBoxFor(m => m.Imie,new { @class = "form-control", placeholder = "Wprowadź nazwę" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Nazwisko)
-        @Html.TextBoxFor(m => m.Nazwisko,new { @class = "form-control", placeholder = "Wprowadź nazwę" })
-    </div>
-        <div class="form-group">
-        @Html.LabelFor(m => m.Pesel)
-        @Html.TextBoxFor(m => m.Pesel,new { @class = "form-control", placeholder = "Wprowadź PESEL" })
-    </div>
-    <div class="form-group">
         @Html.LabelFor(m => m.NazwaFirmy, "Nazwa Firmy")
         @Html.TextBoxFor(m => m.NazwaFirmy,new { @class = "form-control", placeholder = "Wprowadź nazwę" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Nip, "NIP")
-        @Html.TextBoxFor(m => m.Nip,new { @class = "form-control", placeholder = "Wprowadź nazwę" })
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Adres)
