@@ -7,7 +7,7 @@
 
 <h2>Edytuj Kontrahenta</h2>
 
-@using (Html.BeginForm(("EdytujKontrahent", "Kontrahenci", FormMethod.Post, new {role = "form"} )))
+@using (Html.BeginForm("EdytujKontrahent", "Kontrahenci", FormMethod.Post, new {role = "form"} ))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
